@@ -1,0 +1,33 @@
+*.class
+*.log
+
+/.idea
+/out
+/.gradle
+/bin/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+out/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+build/
+target/
+test-output/
+version.txt
