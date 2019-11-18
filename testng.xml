@@ -1,0 +1,7 @@
+<suite name="Suite1" verbose="1" >
+    <test name="Selenide-TestFramework" >
+        <packages>
+            <package name="com.epam" />
+        </packages>
+    </test>
+</suite>

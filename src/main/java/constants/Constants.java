@@ -10,4 +10,8 @@ public class Constants {
             "Italy", "Japan", "Lithuania", "MENA", "Mexico", "Philippines", "Russia", "Spain", "Taiwan", "Turkey", "UK", "Ukraine");
     public static final String TEST_SITE_NAME = "Tribuna.com";
     public static final int COUNT_COMMANDS = 30;
+    public static final String USER = "surfakeemail@gmail.com";
+    public static final String PASS = "qazwsx159";
+    public static final String VERIFY_VALUE = "Atlanta";
+    public static final String VERIFY_TEAM ="Atlanta Hawks";
 }

@@ -1,21 +1,24 @@
 package com.epam;
 
 import com.codeborne.selenide.*;
-import com.codeborne.selenide.impl.Waiter;
-import org.openqa.selenium.By;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import page.LoginPO;
+import page.NBAPageObject;
 import testng.Listener;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.*;
 
 @Listeners(Listener.class)
 public class NBATest {
+    private static final Logger log = LogManager.getLogger("log4j2");
+    private LoginPO loginPO = new LoginPO();
+    private NBAPageObject nbaPO = new NBAPageObject();
 
     @BeforeClass
     public static void setup() {
@@ -26,40 +29,39 @@ public class NBATest {
     @Test
     public void verifyTribunaNameTest() {
         open("/");
-        $("header>div>a:first-child").shouldHave(Condition.matchesText(TEST_SITE_NAME));
+        nbaPO.getLogoHeader().shouldHave(Condition.matchesText(TEST_SITE_NAME));
     }
 
     @Test
     public void verifyCountOfCommands() {
         open("/");
-        $("ul#global-nav-1>li:nth-child(2)").click();
-        $$("ul#global-nav-1>li:nth-child(2)>ul>li").shouldHave(CollectionCondition.size(COUNT_COMMANDS));
+        nbaPO.clickCommandsButton();
+        nbaPO.getListCommands().shouldHave(CollectionCondition.size(COUNT_COMMANDS));
     }
 
     @Test
     public void verifyGloablList() {
         open("/");
-        $("ul#global-nav-1>li:nth-child(3)").click();
-        $$("ul#global-nav-1>li:nth-child(3)>ul>li").shouldHave(CollectionCondition.texts(VERIFY_GLOBAL_LIST));
-
+        nbaPO.clickGlobalButton();
+        nbaPO.getListGlobal().shouldHave(CollectionCondition.texts(VERIFY_GLOBAL_LIST));
     }
 
     @Test
     public void verifyLoginToSite() {
         open("/");
-        $$("li.user-panel__menu-block-item:first-child").findBy(Condition.visible).click();
-        $(By.xpath("//div[1]/div/form/div[2]/label/input")).setValue("surfakeemail@gmail.com");
-        $(By.xpath("//div[1]/div/form/div[3]/label/input")).setValue("qazwsx159");
-        $("form>div:nth-child(6) button").click();
-        SelenideElement tab = $$(By.xpath("//div[4]/div/div/div/ul")).findBy(Condition.appear);
-        Assert.assertTrue(tab.isDisplayed(), "User is logged");
+        nbaPO.clickLoginButton();
+        loginPO.inputUserEmail(USER).inputPassword(PASS).clickLogin();
+        Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
     @Test
     public void verifySerchBar() {
         open("/");
-        $("div.sportsru.sportsru--d>header>div>div>div>form>input").setValue("Atlanta");
-        $("form.search-block__form~ul>li:nth-child(1)>a").click();
-        $("div.short-info>div.descr").shouldHave(Condition.exactText("Atlanta Hawks"));
+        try {
+            nbaPO.inputValueToSearch(VERIFY_VALUE).clickSearchButton();
+        } catch (InterruptedException e) {
+            log.error("Element is not clickable");
+        }
+        nbaPO.getDescription().shouldHave(Condition.exactText(VERIFY_TEAM));
     }
 }
