@@ -1,68 +1,59 @@
 package com.epam;
 
 import com.codeborne.selenide.*;
+import com.epam.bo.LoginBO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import page.LoginPO;
-import page.NBAPageObject;
+import com.epam.page.NBAPageObject;
 import testng.Listener;
 
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.*;
 
-//
+
 @Listeners(Listener.class)
 public class NBATest {
     private static final Logger log = LogManager.getLogger("log4j2");
-    private LoginPO loginPO = new LoginPO();
+    private LoginBO loginBO = new LoginBO();
     private NBAPageObject nbaPO = new NBAPageObject();
 
     @BeforeClass
     public static void setup() {
         Configuration.baseUrl = SITE;
         Configuration.startMaximized = true;
+        open("/");
     }
 
     @Test
     public void verifyTribunaNameTest() {
-        //what is this? test should be understandable
-        open("/");
-        //asserts?
-        nbaPO.getLogoHeader().shouldHave(Condition.matchesText(TEST_SITE_NAME));
+        Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
     @Test
     public void verifyCountOfCommands() {
-        open("/");
         nbaPO.clickCommandsButton();
-        //asserts?
-        nbaPO.getListCommands().shouldHave(CollectionCondition.size(COUNT_COMMANDS));
+        Assert.assertEquals(nbaPO.getListCommands().texts().size(), COUNT_COMMANDS, "Count of commands is not equal");
     }
 
     @Test
     public void verifyGloablList() {
-        open("/");
         nbaPO.clickGlobalButton();
-        //asserts?
-        nbaPO.getListGlobal().shouldHave(CollectionCondition.texts(VERIFY_GLOBAL_LIST));
+        Assert.assertEquals(nbaPO.getListGlobal().texts(), VERIFY_GLOBAL_LIST, "Lists are not same");
     }
 
     @Test
     public void verifyLoginToSite() {
-        open("/");
         nbaPO.clickLoginButton();
-        //make this general, make different users
-        loginPO.inputUserEmail(USER).inputPassword(PASS).clickLogin();
+        loginBO.loginUser(USER, PASS);
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
     @Test
     public void verifySerchBar() {
-        open("/");
         try {
             nbaPO.inputValueToSearch(VERIFY_VALUE).clickSearchButton();
         } catch (InterruptedException e) {

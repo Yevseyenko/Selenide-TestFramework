@@ -1,4 +1,4 @@
-package page;
+package com.epam.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;

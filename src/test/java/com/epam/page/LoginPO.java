@@ -1,4 +1,4 @@
-package page;
+package com.epam.page;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
