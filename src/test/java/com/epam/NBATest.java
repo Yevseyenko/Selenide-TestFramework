@@ -14,7 +14,6 @@ import testng.Listener;
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.*;
 
-
 @Listeners(Listener.class)
 public class NBATest {
     private static final Logger log = LogManager.getLogger("log4j2");

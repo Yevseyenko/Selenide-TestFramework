@@ -30,6 +30,10 @@ public class NBAPageObject {
 
     private ElementsCollection loginedTab = $$(By.xpath("//div[4]/div/div/div/ul"));
 
+    private SelenideElement results = $("div.search-result");
+
+    private SelenideElement basketballBtn = $("ul.nav-list>li:nth-child(3)");
+
     public NBAPageObject inputValueToSearch(String value) throws InterruptedException {
         //this
         wait(1000);
