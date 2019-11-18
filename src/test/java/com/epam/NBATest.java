@@ -14,6 +14,7 @@ import testng.Listener;
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.*;
 
+//
 @Listeners(Listener.class)
 public class NBATest {
     private static final Logger log = LogManager.getLogger("log4j2");
@@ -28,7 +29,9 @@ public class NBATest {
 
     @Test
     public void verifyTribunaNameTest() {
+        //what is this? test should be understandable
         open("/");
+        //asserts?
         nbaPO.getLogoHeader().shouldHave(Condition.matchesText(TEST_SITE_NAME));
     }
 
@@ -36,6 +39,7 @@ public class NBATest {
     public void verifyCountOfCommands() {
         open("/");
         nbaPO.clickCommandsButton();
+        //asserts?
         nbaPO.getListCommands().shouldHave(CollectionCondition.size(COUNT_COMMANDS));
     }
 
@@ -43,6 +47,7 @@ public class NBATest {
     public void verifyGloablList() {
         open("/");
         nbaPO.clickGlobalButton();
+        //asserts?
         nbaPO.getListGlobal().shouldHave(CollectionCondition.texts(VERIFY_GLOBAL_LIST));
     }
 
@@ -50,6 +55,7 @@ public class NBATest {
     public void verifyLoginToSite() {
         open("/");
         nbaPO.clickLoginButton();
+        //make this general, make different users
         loginPO.inputUserEmail(USER).inputPassword(PASS).clickLogin();
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
@@ -62,6 +68,7 @@ public class NBATest {
         } catch (InterruptedException e) {
             log.error("Element is not clickable");
         }
+        //what if team does not play this week or gets out of nba?
         nbaPO.getDescription().shouldHave(Condition.exactText(VERIFY_TEAM));
     }
 }

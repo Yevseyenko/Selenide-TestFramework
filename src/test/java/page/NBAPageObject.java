@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class NBAPageObject {
-
+    //todo fix url, I bet you can locate any element with 1, maximum 2 nodes
     private SelenideElement logoHeader = $("header>div>a:first-child");
 
     private SelenideElement inputSearch = $("div.sportsru.sportsru--d>header>div>div>div>form>input");
@@ -31,7 +31,9 @@ public class NBAPageObject {
     private ElementsCollection loginedTab = $$(By.xpath("//div[4]/div/div/div/ul"));
 
     public NBAPageObject inputValueToSearch(String value) throws InterruptedException {
+        //this
         wait(1000);
+        //the above code
         inputSearch.setValue(value);
         return this;
     }
