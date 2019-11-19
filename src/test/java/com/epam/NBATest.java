@@ -10,11 +10,13 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.epam.page.NBAPageObject;
 import testng.Listener;
+import utils.Utils;
 
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.*;
 
 @Listeners(Listener.class)
+
 public class NBATest {
     private static final Logger log = LogManager.getLogger("log4j2");
     private LoginBO loginBO = new LoginBO();
@@ -24,7 +26,7 @@ public class NBATest {
     public static void setup() {
         Configuration.baseUrl = SITE;
         Configuration.startMaximized = true;
-        open("/");
+        open(PATH_NBA);
     }
 
     @Test
@@ -47,18 +49,13 @@ public class NBATest {
     @Test
     public void verifyLoginToSite() {
         nbaPO.clickLoginButton();
-        loginBO.loginUser(USER, PASS);
-        Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
+        loginBO.loginUser(USER,PASS);
+         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
     @Test
-    public void verifySerchBar() {
-        try {
-            nbaPO.inputValueToSearch(VERIFY_VALUE).clickSearchButton();
-        } catch (InterruptedException e) {
-            log.error("Element is not clickable");
-        }
-        //what if team does not play this week or gets out of nba?
-        nbaPO.getDescription().shouldHave(Condition.exactText(VERIFY_TEAM));
+    public void verifySearchResults() {
+        nbaPO.inputValueToSearch("").clickSearchButton();
+        Assert.assertTrue(nbaPO.isSearchResultAppear(), "Search result page doesn't appear");
     }
 }

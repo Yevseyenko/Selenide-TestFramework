@@ -3,10 +3,9 @@ package testng;
 
 //try this listener also AbstractWebDriverEventListener, try to mesh them
 
-
 import org.testng.*;
 
-public class Listener  implements ITestListener, ISuiteListener, IInvokedMethodListener {
+public class Listener implements ITestListener, ISuiteListener, IInvokedMethodListener {
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 

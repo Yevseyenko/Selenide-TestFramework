@@ -4,17 +4,24 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class NBAPageObject {
     //todo fix url, I bet you can locate any element with 1, maximum 2 nodes
-    private SelenideElement logoHeader = $("header>div>a:first-child");
+    private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,'tribuna')]"));
 
-    private SelenideElement inputSearch = $("div.sportsru.sportsru--d>header>div>div>div>form>input");
+    private static SelenideElement inputSearch = $("form[action*=\"tr\"]>input.search-block__input");
 
-    private SelenideElement searchButon = $("form.search-block__form~ul>li:nth-child(1)>a");
+    private SelenideElement searchButon = $("form[action*=\"tr\"]>button");
 
     private SelenideElement description = $("div.short-info>div.descr");
 
@@ -28,26 +35,22 @@ public class NBAPageObject {
 
     private ElementsCollection listGlobal = $$("ul#global-nav-1>li:nth-child(3)>ul>li");
 
-    private ElementsCollection loginedTab = $$(By.xpath("//div[4]/div/div/div/ul"));
+    private SelenideElement loginedTab = $(By.xpath("//li[contains(@class,'menu-block-user')]/a"));
 
     private SelenideElement results = $("div.search-result");
 
-    private SelenideElement basketballBtn = $("ul.nav-list>li:nth-child(3)");
-
-    public NBAPageObject inputValueToSearch(String value) throws InterruptedException {
-        //this
-        wait(1000);
-        //the above code
+    public NBAPageObject inputValueToSearch(String value) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(getWebDriver())
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(NoSuchElementException.class);
+        wait.until(webDriver -> webDriver.findElement(By.cssSelector("form[action*=\"tr\"]>input.search-block__input")));
         inputSearch.setValue(value);
         return this;
     }
 
     public void clickSearchButton() {
         searchButon.click();
-    }
-
-    public SelenideElement getDescription() {
-        return description;
     }
 
     public void clickLoginButton() {
@@ -75,6 +78,15 @@ public class NBAPageObject {
     }
 
     public boolean isLoginedTabDisplayed() {
-        return loginedTab.findBy(Condition.appear).isDisplayed();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return loginedTab.isDisplayed();
+    }
+
+    public boolean isSearchResultAppear() {
+        return results.exists();
     }
 }
