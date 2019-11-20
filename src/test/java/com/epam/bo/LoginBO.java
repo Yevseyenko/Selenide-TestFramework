@@ -7,6 +7,6 @@ public class LoginBO {
     private LoginPO loginPO = new LoginPO();
 
     public void loginUser(String user, char [] password) {
-        loginPO.inputUserEmail(user).inputPassword(Utils.getPassword(password)).clickLogin();
+        loginPO.inputUserEmail(user).inputPassword(Utils.getPassword(password));
     }
 }

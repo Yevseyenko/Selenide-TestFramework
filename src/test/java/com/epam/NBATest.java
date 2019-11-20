@@ -2,24 +2,25 @@ package com.epam;
 
 import com.codeborne.selenide.*;
 import com.epam.bo.LoginBO;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.epam.page.LoginPO;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.epam.page.NBAPageObject;
 import testng.Listener;
-import utils.Utils;
+import testng.WebDriverListener;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static constants.Constants.*;
 
 @Listeners(Listener.class)
 
 public class NBATest {
-    private static final Logger log = LogManager.getLogger("log4j2");
     private LoginBO loginBO = new LoginBO();
+    private LoginPO loginPO = new LoginPO();
     private NBAPageObject nbaPO = new NBAPageObject();
 
     @BeforeClass
@@ -27,6 +28,8 @@ public class NBATest {
         Configuration.baseUrl = SITE;
         Configuration.startMaximized = true;
         open(PATH_NBA);
+        EventFiringWebDriver driver = new EventFiringWebDriver(getWebDriver());
+        driver.register(new WebDriverListener());
     }
 
     @Test
@@ -49,8 +52,9 @@ public class NBATest {
     @Test
     public void verifyLoginToSite() {
         nbaPO.clickLoginButton();
-        loginBO.loginUser(USER,PASS);
-         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
+        loginBO.loginUser(USER, PASS);
+        loginPO.clickLogin();
+        Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
     @Test

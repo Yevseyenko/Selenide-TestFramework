@@ -11,7 +11,7 @@ public class LoginPO {
     private SelenideElement userNameInput = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'auth__login-input a')]"));
     private SelenideElement userPassword = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'auth__login-input i')]"));
     private SelenideElement buttonLogin = $(By.xpath("//div[@class='auth__form-row']/button[contains(@class,'p')]"));
-//    private SelenideElement buttonLogin = $("form>div:nth-child(6) button");
+
     public LoginPO inputUserEmail(String user) {
         userNameInput.setValue(user);
         return this;
@@ -23,7 +23,8 @@ public class LoginPO {
     }
 
     public void clickLogin() {
-        buttonLogin.should(Condition.appear).click();
+
+        buttonLogin.doubleClick();
     }
 }
 

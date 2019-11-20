@@ -78,12 +78,7 @@ public class NBAPageObject {
     }
 
     public boolean isLoginedTabDisplayed() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return loginedTab.isDisplayed();
+              return loginedTab.isDisplayed();
     }
 
     public boolean isSearchResultAppear() {
