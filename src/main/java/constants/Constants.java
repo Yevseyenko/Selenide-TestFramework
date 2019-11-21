@@ -4,9 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Constants {
-    //what is you will need test tribuna site, not the nba segment? another variable?
     public static final String SITE = "https://ua.tribuna.com";
-    public static final String PATH_NBA ="/nba/?gr=www";
     public static final List<String> VERIFY_GLOBAL_LIST = Arrays.asList(
             "Argentina", "Australia", "Belarus", "Brasil", "Canada", "China", "Enebea", "France", "Germany", "India", "Israel",
             "Italy", "Japan", "Lithuania", "MENA", "Mexico", "Philippines", "Russia", "Spain", "Taiwan", "Turkey", "UK", "Ukraine");

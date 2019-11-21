@@ -3,6 +3,8 @@ package com.epam.page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.epam.enums.LocatorTypeEnum;
+import com.epam.utils.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -15,11 +17,15 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class NBAPageObject {
+public class NBAPO {
     //todo fix url, I bet you can locate any element with 1, maximum 2 nodes
     private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,'tribuna')]"));
 
-    private static SelenideElement inputSearch = $("form[action*=\"tr\"]>input.search-block__input");
+    private static String inputSearchLocator ="form[action*=\"tr\"]>input.search-block__input";
+
+    private static String resultsLocator = "div.search-result";
+
+    private static SelenideElement inputSearch = $(inputSearchLocator);
 
     private SelenideElement searchButon = $("form[action*=\"tr\"]>button");
 
@@ -37,14 +43,10 @@ public class NBAPageObject {
 
     private SelenideElement loginedTab = $(By.xpath("//li[contains(@class,'menu-block-user')]/a"));
 
-    private SelenideElement results = $("div.search-result");
+    private SelenideElement results = $(resultsLocator);
 
-    public NBAPageObject inputValueToSearch(String value) {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(getWebDriver())
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofSeconds(1))
-                .ignoring(NoSuchElementException.class);
-        wait.until(webDriver -> webDriver.findElement(By.cssSelector("form[action*=\"tr\"]>input.search-block__input")));
+    public NBAPO inputValueToSearch(String value) {
+        Waiter.fluentWait(inputSearchLocator, LocatorTypeEnum.CSS);
         inputSearch.setValue(value);
         return this;
     }
@@ -82,6 +84,7 @@ public class NBAPageObject {
     }
 
     public boolean isSearchResultAppear() {
+        Waiter.fluentWait(resultsLocator,LocatorTypeEnum.CSS);
         return results.exists();
     }
 }

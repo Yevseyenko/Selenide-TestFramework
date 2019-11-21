@@ -1,19 +1,16 @@
 package com.epam;
 
-import com.codeborne.selenide.*;
 import com.epam.bo.LoginBO;
 import com.epam.page.LoginPO;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import com.epam.page.TribunaPO;
+import com.epam.utils.SelenideConfigurator;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.epam.page.NBAPageObject;
+import com.epam.page.NBAPO;
 import testng.Listener;
-import testng.WebDriverListener;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static constants.Constants.*;
 
 @Listeners(Listener.class)
@@ -21,21 +18,19 @@ import static constants.Constants.*;
 public class NBATest {
     private LoginBO loginBO = new LoginBO();
     private LoginPO loginPO = new LoginPO();
-    private NBAPageObject nbaPO = new NBAPageObject();
+    private NBAPO nbaPO = new NBAPO();
+    private TribunaPO tribunaPO = new TribunaPO();
 
     @BeforeClass
-    public static void setup() {
-        Configuration.baseUrl = SITE;
-        Configuration.startMaximized = true;
-        open(PATH_NBA);
-        EventFiringWebDriver driver = new EventFiringWebDriver(getWebDriver());
-        driver.register(new WebDriverListener());
+    public void setup() {
+        SelenideConfigurator.configure();
+        tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
     @Test
     public void verifyTribunaNameTest() {
         Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
-    }
+         }
 
     @Test
     public void verifyCountOfCommands() {
@@ -49,15 +44,16 @@ public class NBATest {
         Assert.assertEquals(nbaPO.getListGlobal().texts(), VERIFY_GLOBAL_LIST, "Lists are not same");
     }
 
-    @Test
+    @Test(priority = 2)
     public void verifyLoginToSite() {
+        tribunaPO.hoverBasketBtn().clickNbaBtn();
         nbaPO.clickLoginButton();
         loginBO.loginUser(USER, PASS);
         loginPO.clickLogin();
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
-    @Test
+    @Test(priority = 1)
     public void verifySearchResults() {
         nbaPO.inputValueToSearch("").clickSearchButton();
         Assert.assertTrue(nbaPO.isSearchResultAppear(), "Search result page doesn't appear");

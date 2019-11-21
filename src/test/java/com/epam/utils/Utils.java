@@ -1,4 +1,4 @@
-package utils;
+package com.epam.utils;
 
 
 import org.apache.commons.codec.binary.StringUtils;
