@@ -6,14 +6,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.epam.enums.LocatorTypeEnum;
 import com.epam.utils.Waiter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-
-import java.time.Duration;
-
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
