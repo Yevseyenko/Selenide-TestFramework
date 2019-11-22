@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPO {
 
+    //very nice URLs
     private SelenideElement userNameInput = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'auth__login-input a')]"));
     private SelenideElement userPassword = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'auth__login-input i')]"));
     private SelenideElement buttonLogin = $(By.xpath("//div[@class='auth__form-row']/button[contains(@class,'p')]"));
