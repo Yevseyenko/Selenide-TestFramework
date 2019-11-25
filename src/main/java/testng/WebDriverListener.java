@@ -31,8 +31,7 @@ public class WebDriverListener extends AbstractWebDriverEventListener {
         String description = "tag:" + element.getTagName();
         if (element.getAttribute("id") != null) {
             description += " id: " + element.getAttribute("id");
-        }
-        else if (element.getAttribute("name") != null) {
+        } else if (element.getAttribute("name") != null) {
             description += " name: " + element.getAttribute("name");
         }
         description += " ('" + element.getText() + "')";

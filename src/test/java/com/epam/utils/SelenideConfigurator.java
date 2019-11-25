@@ -9,7 +9,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static constants.Constants.SITE;
 
 public class SelenideConfigurator {
-    public static void configure(){
+    public static void configure() {
         Configuration.baseUrl = SITE;
         Configuration.startMaximized = true;
         open("/");

@@ -30,7 +30,7 @@ public class NBATest {
     @Test
     public void verifyTribunaNameTest() {
         Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
-         }
+    }
 
     @Test
     public void verifyCountOfCommands() {

@@ -6,14 +6,15 @@ import com.codeborne.selenide.SelenideElement;
 import com.epam.enums.LocatorTypeEnum;
 import com.epam.utils.Waiter;
 import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class NBAPO {
-    //todo fix url, I bet you can locate any element with 1, maximum 2 nodes
+
     private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,'tribuna')]"));
 
-    private static String inputSearchLocator ="form[action*=\"tr\"]>input.search-block__input";
+    private static String inputSearchLocator = "form[action*=\"tr\"]>input.search-block__input";
 
     private static String resultsLocator = "div.search-result";
 
@@ -72,11 +73,11 @@ public class NBAPO {
     }
 
     public boolean isLoginedTabDisplayed() {
-              return loginedTab.isDisplayed();
+        return loginedTab.isDisplayed();
     }
 
     public boolean isSearchResultAppear() {
-        Waiter.fluentWait(resultsLocator,LocatorTypeEnum.CSS);
+        Waiter.fluentWait(resultsLocator, LocatorTypeEnum.CSS);
         return results.exists();
     }
 }
