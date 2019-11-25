@@ -29,9 +29,9 @@ public class NBAPO {
 
     private SelenideElement globalButton = $("ul#global-nav-1>li:nth-child(3)");
 
-    private ElementsCollection listCommands = $$("ul#global-nav-1>li:nth-child(2)>ul>li");
+    private ElementsCollection listCommands = $$("li:nth-child(2)>ul>li");
 
-    private ElementsCollection listGlobal = $$("ul#global-nav-1>li:nth-child(3)>ul>li");
+    private ElementsCollection listGlobal = $$("li:nth-child(3)>ul>li");
 
     private SelenideElement loginedTab = $(By.xpath("//li[contains(@class,'menu-block-user')]/a"));
 

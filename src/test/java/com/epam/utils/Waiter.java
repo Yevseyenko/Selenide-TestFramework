@@ -18,8 +18,6 @@ public class Waiter {
         if (locatorTypeEnum.equals(CSS)) {
             Wait<WebDriver> wait = new FluentWait<WebDriver>(getWebDriver())
                     .withTimeout(Duration.ofSeconds(10))
-                    //TODO 1 second is too big, find standart loading page metric
-
                     .pollingEvery(Duration.ofMillis(400))
                     .ignoring(NoSuchElementException.class);
             wait.until(webDriver -> webDriver.findElement(By.cssSelector(locator)));
