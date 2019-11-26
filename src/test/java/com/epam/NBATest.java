@@ -1,9 +1,13 @@
 package com.epam;
 
+import ch.qos.logback.classic.Logger;
+import com.epam.bo.CalendarBO;
 import com.epam.bo.LoginBO;
+import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
 import com.epam.page.TribunaPO;
 import com.epam.utils.SelenideConfigurator;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -11,13 +15,19 @@ import org.testng.annotations.Test;
 import com.epam.page.NBAPO;
 import testng.Listener;
 
+
 import static constants.Constants.*;
 
 @Listeners(Listener.class)
 
 public class NBATest {
+    Logger logger =
+            (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
+    //TODO create email with information about previous NBA match with Highlighting the winner
     private LoginBO loginBO = new LoginBO();
     private LoginPO loginPO = new LoginPO();
+    private CalendarBO calendarBO = new CalendarBO();
+    private CalendarPO calendarPO = new CalendarPO();
     private NBAPO nbaPO = new NBAPO();
     private TribunaPO tribunaPO = new TribunaPO();
 
@@ -57,5 +67,12 @@ public class NBATest {
     public void verifySearchResults() {
         nbaPO.inputValueToSearch("").clickSearchButton();
         Assert.assertTrue(nbaPO.isSearchResultAppear(), "Search result page doesn't appear");
+    }
+
+    @Test
+    public void verifyMatchResults() {
+        nbaPO.clickCalendarBtn();
+        calendarPO.clickPreviousBtn();
+        calendarBO.getScores();
     }
 }

@@ -36,6 +36,8 @@ public class NBAPO {
 
     private SelenideElement loginedTab = $(By.xpath("//li[contains(@class,'menu-block-user')]/a"));
 
+    private SelenideElement calendarButton =$("li>a[href*=scores]");
+
     private SelenideElement results = $(resultsLocator);
 
     public NBAPO inputValueToSearch(String value) {
@@ -70,6 +72,10 @@ public class NBAPO {
 
     public void clickGlobalButton() {
         globalButton.click();
+    }
+
+    public void clickCalendarBtn(){
+        calendarButton.click();
     }
 
     public boolean isLoginedTabDisplayed() {
