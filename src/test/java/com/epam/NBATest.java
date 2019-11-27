@@ -23,7 +23,6 @@ import static constants.Constants.*;
 public class NBATest {
     Logger logger =
             (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
-    //TODO create email with information about previous NBA match with Highlighting the winner
     private LoginBO loginBO = new LoginBO();
     private LoginPO loginPO = new LoginPO();
     private CalendarBO calendarBO = new CalendarBO();
@@ -37,24 +36,24 @@ public class NBATest {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
-    @Test
+    @Test(description = "Scenario with verifying name logo")
     public void verifyTribunaNameTest() {
         Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
-    @Test
+    @Test(description = "Scenario with verifying count of commands")
     public void verifyCountOfCommands() {
         nbaPO.clickCommandsButton();
         Assert.assertEquals(nbaPO.getListCommands().texts().size(), COUNT_COMMANDS, "Count of commands is not equal");
     }
 
-    @Test
+    @Test(description = "Scenario with verifying Global list")
     public void verifyGloablList() {
         nbaPO.clickGlobalButton();
         Assert.assertEquals(nbaPO.getListGlobal().texts(), VERIFY_GLOBAL_LIST, "Lists are not same");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, enabled = false, description = "Scenario with login to site")
     public void verifyLoginToSite() {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
         nbaPO.clickLoginButton();
@@ -63,7 +62,7 @@ public class NBATest {
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,description = "Scenario with verifying searching page")
     public void verifySearchResults() {
         nbaPO.inputValueToSearch("").clickSearchButton();
         Assert.assertTrue(nbaPO.isSearchResultAppear(), "Search result page doesn't appear");

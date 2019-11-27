@@ -1,6 +1,21 @@
+import sun.invoke.util.Wrapper
+
 plugins {
     id 'java'
+    id("io.qameta.allure") version "2.8.1"
 }
+
+allure {
+    version = '2.13.0'
+    autoconfigure = true
+    aspectjweaver = true
+}
+
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
 
 group 'Selenide-TestFramework'
 version '1.0-SNAPSHOT'
@@ -9,6 +24,15 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+
+
+test {
+    useTestNG()
+    dependsOn cleanTest
+    systemProperties System.getProperties()
+    testLogging.showStandardStreams = true
 }
 
 dependencies {
@@ -20,10 +44,6 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
     compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.6.4'
     compile group: 'javax.mail', name: 'mail', version: '1.4'
+    compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.0'
 }
 
-test {
-    useTestNG() {
-             suites 'src/testng.xml' 
-    }
-}

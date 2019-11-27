@@ -31,3 +31,4 @@ build/
 target/
 test-output/
 version.txt
+.allure/
