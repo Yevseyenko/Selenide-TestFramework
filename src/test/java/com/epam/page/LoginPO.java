@@ -25,7 +25,6 @@ public class LoginPO {
     }
 
     public void clickLogin() {
-
         buttonLogin.doubleClick();
     }
 }

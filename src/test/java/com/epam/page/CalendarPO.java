@@ -20,6 +20,8 @@ public class CalendarPO {
     private String winnerScoreLocator = "//img[@class=\"winner\"]/parent::td/parent::tr/td[@class=\"final-score\"]/span";
     private ElementsCollection winnerScore = $$(By.xpath(winnerScoreLocator));
     private ElementsCollection winnerName = $$(By.xpath("//img[@class=\"winner\"]/parent::td/parent::tr/td[@class=\"team-abbrv\"]/a"));
+    private SelenideElement calendarBtn = $("a.calendar-button");
+    private SelenideElement tableWinner = $("div.final-game-table-wrapper");
 
     @Step("Clicking on previous date button")
     public void clickPreviousBtn() {
@@ -38,4 +40,11 @@ public class CalendarPO {
         return winnerName.texts();
     }
 
+    public boolean isCalenadrBtnDisplayed() {
+        return calendarBtn.isDisplayed();
+    }
+
+    public boolean isFinalTableDisplayed() {
+        return  tableWinner.isDisplayed();
+    }
 }

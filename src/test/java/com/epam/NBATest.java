@@ -7,8 +7,10 @@ import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
 import com.epam.page.TribunaPO;
 import com.epam.utils.SelenideConfigurator;
+import io.qameta.allure.Step;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.TestListenerAdapter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -18,7 +20,7 @@ import testng.Listener;
 
 import static constants.Constants.*;
 
-@Listeners(Listener.class)
+@Listeners({Listener.class, TestListenerAdapter.class})
 
 public class NBATest {
     Logger logger =
@@ -36,7 +38,7 @@ public class NBATest {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
-    @Test(description = "Scenario with verifying name logo")
+    @Test(priority = 1, description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
         Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
@@ -53,7 +55,7 @@ public class NBATest {
         Assert.assertEquals(nbaPO.getListGlobal().texts(), VERIFY_GLOBAL_LIST, "Lists are not same");
     }
 
-    @Test(priority = 2, enabled = false, description = "Scenario with login to site")
+    @Test(enabled = false, description = "Scenario with login to site")
     public void verifyLoginToSite() {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
         nbaPO.clickLoginButton();
@@ -62,16 +64,19 @@ public class NBATest {
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
-    @Test(priority = 1,description = "Scenario with verifying searching page")
+    @Test(priority = 2, description = "Scenario with verifying searching page", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifySearchResults() {
         nbaPO.inputValueToSearch("").clickSearchButton();
         Assert.assertTrue(nbaPO.isSearchResultAppear(), "Search result page doesn't appear");
     }
 
-    @Test
-    public void verifyMatchResults() {
+
+    @Test( description = "Scenario with verifying calendar page")
+    public void verifyCalendarButtonAndSendingMatchResults() {
         nbaPO.clickCalendarBtn();
         calendarPO.clickPreviousBtn();
         calendarBO.getScores();
+        Assert.assertTrue(calendarPO.isCalenadrBtnDisplayed(), "Calendar button isn't displayed");
+        Assert.assertTrue(calendarPO.isFinalTableDisplayed(), "Final table isn't displayed");
     }
 }

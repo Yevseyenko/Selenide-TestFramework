@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.epam.enums.LocatorTypeEnum;
 import com.epam.utils.Waiter;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -36,16 +37,18 @@ public class NBAPO {
 
     private SelenideElement loginedTab = $(By.xpath("//li[contains(@class,'menu-block-user')]/a"));
 
-    private SelenideElement calendarButton =$("li>a[href*=scores]");
+    private SelenideElement calendarButton = $("li>a[href*=scores]");
 
     private SelenideElement results = $(resultsLocator);
 
+    @Step("Waiting for input Search")
     public NBAPO inputValueToSearch(String value) {
         Waiter.fluentWait(inputSearchLocator, LocatorTypeEnum.CSS);
         inputSearch.setValue(value);
         return this;
     }
 
+    @Step("Clicking on Search Button")
     public void clickSearchButton() {
         searchButon.click();
     }
@@ -58,6 +61,7 @@ public class NBAPO {
         return logoHeader;
     }
 
+    @Step("Clicking on Command Button")
     public void clickCommandsButton() {
         commandsButton.click();
     }
@@ -70,11 +74,13 @@ public class NBAPO {
         return listGlobal;
     }
 
+    @Step("Clicking on Global Button")
     public void clickGlobalButton() {
         globalButton.click();
     }
 
-    public void clickCalendarBtn(){
+    @Step("Clicking on Callendar Button")
+    public void clickCalendarBtn() {
         calendarButton.click();
     }
 
