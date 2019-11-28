@@ -13,7 +13,9 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class NBAPO {
 
-    private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,'tribuna')]"));
+    private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,' tribuna')]"));
+
+    private SelenideElement logoNBA = $(By.xpath("//a[contains(@class,'--nba')]"));
 
     private static String inputSearchLocator = "form[action*=\"tr\"]>input.search-block__input";
 
@@ -40,6 +42,8 @@ public class NBAPO {
     private SelenideElement calendarButton = $("li>a[href*=scores]");
 
     private SelenideElement results = $(resultsLocator);
+
+    private SelenideElement defaultVersion=$("span[data-ng-i18next*=\"editionLabel\"]");
 
     @Step("Waiting for input Search")
     public NBAPO inputValueToSearch(String value) {
@@ -82,6 +86,18 @@ public class NBAPO {
     @Step("Clicking on Callendar Button")
     public void clickCalendarBtn() {
         calendarButton.click();
+    }
+
+    public void hoverDefault(){
+        defaultVersion.hover();
+    }
+
+    public void clickOnLogoNBA(){
+        logoNBA.click();
+    }
+
+    public void clickOnLogoHeader(){
+        logoHeader.click();
     }
 
     public boolean isLoginedTabDisplayed() {

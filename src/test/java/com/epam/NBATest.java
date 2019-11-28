@@ -7,8 +7,6 @@ import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
 import com.epam.page.TribunaPO;
 import com.epam.utils.SelenideConfigurator;
-import io.qameta.allure.Step;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.TestListenerAdapter;
 import org.testng.annotations.BeforeClass;
@@ -23,8 +21,6 @@ import static constants.Constants.*;
 @Listeners({Listener.class, TestListenerAdapter.class})
 
 public class NBATest {
-    Logger logger =
-            (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
     private LoginBO loginBO = new LoginBO();
     private LoginPO loginPO = new LoginPO();
     private CalendarBO calendarBO = new CalendarBO();
@@ -40,6 +36,7 @@ public class NBATest {
 
     @Test(priority = 1, description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
+        nbaPO.hoverDefault();
         Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
@@ -71,7 +68,7 @@ public class NBATest {
     }
 
 
-    @Test( description = "Scenario with verifying calendar page")
+    @Test(description = "Scenario with verifying calendar page")
     public void verifyCalendarButtonAndSendingMatchResults() {
         nbaPO.clickCalendarBtn();
         calendarPO.clickPreviousBtn();
