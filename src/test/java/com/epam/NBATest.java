@@ -35,19 +35,19 @@ public class NBATest {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
-    @Test(description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
+    @Test(priority = 1,description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
         nbaPO.clickDefaultBtn();
         Assert.assertEquals(nbaBO.getLogoHeaderText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
-    @Test(description = "Scenario with verifying count of commands")
+    @Test(priority = 2,description = "Scenario with verifying count of commands")
     public void verifyCountOfCommands() {
         nbaPO.clickCommandsButton();
         Assert.assertEquals(nbaBO.getCommandListSize(), COUNT_COMMANDS, "Count of commands is not equal");
     }
 
-    @Test(description = "Scenario with verifying Global list")
+    @Test(priority = 3,description = "Scenario with verifying Global list")
     public void verifyGloablList() {
         nbaPO.clickGlobalButton();
         Assert.assertEquals(nbaBO.getGlobalList(), VERIFY_GLOBAL_LIST, "Lists are not same");
@@ -62,7 +62,7 @@ public class NBATest {
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }
 
-    @Test(priority = 2, description = "Scenario with verifying searching page", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
+    @Test(priority = 4, description = "Scenario with verifying searching page", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifySearchResults() {
         nbaPO.inputValueToSearch("").clickSearchButton();
         Assert.assertTrue(nbaPO.isSearchResultAppear(), "Search result page doesn't appear");
