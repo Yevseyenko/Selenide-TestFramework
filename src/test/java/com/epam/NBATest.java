@@ -34,7 +34,7 @@ public class NBATest {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
-    @Test(priority = 1, description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
+    @Test(priority = 1,enabled = false, description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
         nbaPO.hoverDefault();
         Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
