@@ -1,5 +1,6 @@
 package com.epam;
 
+import ch.qos.logback.classic.Logger;
 import com.epam.bo.CalendarBO;
 import com.epam.bo.LoginBO;
 import com.epam.bo.NBABO;
@@ -7,6 +8,7 @@ import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
 import com.epam.page.TribunaPO;
 import com.epam.utils.SelenideConfigurator;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.TestListenerAdapter;
 import org.testng.annotations.BeforeClass;
@@ -21,6 +23,7 @@ import static constants.Constants.*;
 @Listeners({Listener.class, TestListenerAdapter.class})
 
 public class NBATest {
+    Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
     private LoginBO loginBO = new LoginBO();
     private LoginPO loginPO = new LoginPO();
     private CalendarBO calendarBO = new CalendarBO();
@@ -69,7 +72,7 @@ public class NBATest {
     }
 
 
-    @Test(description = "Scenario with verifying calendar page")
+    @Test(priority = 3, description = "Scenario with verifying calendar page")
     public void verifyCalendarButtonAndSendingMatchResults() {
         nbaPO.clickCalendarBtn();
         calendarPO.clickPreviousBtn();
