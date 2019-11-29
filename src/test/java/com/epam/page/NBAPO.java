@@ -15,8 +15,6 @@ public class NBAPO {
 
     private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,' tribuna')]"));
 
-    private SelenideElement logoNBA = $(By.xpath("//a[contains(@class,'--nba')]"));
-
     private static String inputSearchLocator = "form[action*=\"tr\"]>input.search-block__input";
 
     private static String resultsLocator = "div.search-result";
@@ -24,8 +22,6 @@ public class NBAPO {
     private static SelenideElement inputSearch = $(inputSearchLocator);
 
     private SelenideElement searchButon = $("form[action*=\"tr\"]>button");
-
-    private SelenideElement description = $("div.short-info>div.descr");
 
     private ElementsCollection loginButton = $$("li.user-panel__menu-block-item:first-child");
 
@@ -43,7 +39,7 @@ public class NBAPO {
 
     private SelenideElement results = $(resultsLocator);
 
-    private SelenideElement defaultVersion=$("span[data-ng-i18next*=\"editionLabel\"]");
+    private SelenideElement defaultVersion = $("span[data-ng-i18next*=\"editionLabel\"]");
 
     @Step("Waiting for input Search")
     public NBAPO inputValueToSearch(String value) {
@@ -88,16 +84,8 @@ public class NBAPO {
         calendarButton.click();
     }
 
-    public void hoverDefault(){
-        defaultVersion.hover();
-    }
-
-    public void clickOnLogoNBA(){
-        logoNBA.click();
-    }
-
-    public void clickOnLogoHeader(){
-        logoHeader.click();
+    public void clickDefaultBtn() {
+        defaultVersion.click();
     }
 
     public boolean isLoginedTabDisplayed() {

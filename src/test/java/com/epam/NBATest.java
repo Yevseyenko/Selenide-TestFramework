@@ -1,8 +1,8 @@
 package com.epam;
 
-import ch.qos.logback.classic.Logger;
 import com.epam.bo.CalendarBO;
 import com.epam.bo.LoginBO;
+import com.epam.bo.NBABO;
 import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
 import com.epam.page.TribunaPO;
@@ -26,6 +26,7 @@ public class NBATest {
     private CalendarBO calendarBO = new CalendarBO();
     private CalendarPO calendarPO = new CalendarPO();
     private NBAPO nbaPO = new NBAPO();
+    private NBABO nbaBO = new NBABO();
     private TribunaPO tribunaPO = new TribunaPO();
 
     @BeforeClass
@@ -34,22 +35,22 @@ public class NBATest {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
-    @Test(priority = 1,enabled = false, description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
+    @Test(description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
-        nbaPO.hoverDefault();
-        Assert.assertEquals(nbaPO.getLogoHeader().getText(), TEST_SITE_NAME, "Logo headeers are not equal");
+        nbaPO.clickDefaultBtn();
+        Assert.assertEquals(nbaBO.getLogoHeaderText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
     @Test(description = "Scenario with verifying count of commands")
     public void verifyCountOfCommands() {
         nbaPO.clickCommandsButton();
-        Assert.assertEquals(nbaPO.getListCommands().texts().size(), COUNT_COMMANDS, "Count of commands is not equal");
+        Assert.assertEquals(nbaBO.getCommandListSize(), COUNT_COMMANDS, "Count of commands is not equal");
     }
 
     @Test(description = "Scenario with verifying Global list")
     public void verifyGloablList() {
         nbaPO.clickGlobalButton();
-        Assert.assertEquals(nbaPO.getListGlobal().texts(), VERIFY_GLOBAL_LIST, "Lists are not same");
+        Assert.assertEquals(nbaBO.getGlobalList(), VERIFY_GLOBAL_LIST, "Lists are not same");
     }
 
     @Test(enabled = false, description = "Scenario with login to site")
