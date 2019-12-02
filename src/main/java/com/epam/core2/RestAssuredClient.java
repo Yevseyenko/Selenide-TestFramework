@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
 
-public class RestClient {
+public class RestAssuredClient implements Client {
     Logger logger =
             (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
 
