@@ -1,4 +1,4 @@
-package testng;
+package com.epam.core.testng;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

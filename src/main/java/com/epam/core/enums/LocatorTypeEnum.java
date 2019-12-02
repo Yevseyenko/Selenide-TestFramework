@@ -1,4 +1,4 @@
-package com.epam.enums;
+package com.epam.core.enums;
 
 public enum LocatorTypeEnum {
     XPATH,

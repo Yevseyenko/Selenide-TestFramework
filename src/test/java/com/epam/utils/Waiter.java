@@ -1,6 +1,6 @@
 package com.epam.utils;
 
-import com.epam.enums.LocatorTypeEnum;
+import com.epam.core.enums.LocatorTypeEnum;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +10,8 @@ import org.openqa.selenium.support.ui.Wait;
 import java.time.Duration;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static com.epam.enums.LocatorTypeEnum.CSS;
-import static com.epam.enums.LocatorTypeEnum.XPATH;
+import static com.epam.core.enums.LocatorTypeEnum.CSS;
+import static com.epam.core.enums.LocatorTypeEnum.XPATH;
 
 public class Waiter {
     public static void fluentWait(String locator, LocatorTypeEnum locatorTypeEnum) {

@@ -3,7 +3,7 @@ package com.epam.page;
 import ch.qos.logback.classic.Logger;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.epam.enums.LocatorTypeEnum;
+import com.epam.core.enums.LocatorTypeEnum;
 import com.epam.utils.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;

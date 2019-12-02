@@ -15,10 +15,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.epam.page.NBAPO;
-import testng.Listener;
+import com.epam.core.testng.Listener;
 
 
-import static constants.Constants.*;
+import static com.epam.core.constants.Constants.*;
 
 @Listeners({Listener.class, TestListenerAdapter.class})
 

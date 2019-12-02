@@ -1,4 +1,4 @@
-package testng;
+package com.epam.core.testng;
 
 
 //try this listener also AbstractWebDriverEventListener, try to mesh them
@@ -6,6 +6,7 @@ package testng;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.*;
+
 
 public class Listener implements ITestListener, ISuiteListener, IInvokedMethodListener {
     Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
