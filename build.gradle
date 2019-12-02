@@ -43,6 +43,7 @@ dependencies {
     compile group: 'javax.mail', name: 'mail', version: '1.4'
     compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.0'
     compile group: 'io.rest-assured', name: 'rest-assured', version: '4.1.2'
+    compile group: 'commons-configuration', name: 'commons-configuration', version: '1.10'
 }
 
 
