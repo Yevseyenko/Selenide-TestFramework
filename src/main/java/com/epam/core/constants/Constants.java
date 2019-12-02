@@ -10,6 +10,9 @@ public class Constants {
             "Italy", "Japan", "MENA", "Mexico", "Philippines", "Russia", "Spain", "Taiwan", "United Kingdom", "Ukraine");
     public static final String TEST_SITE_NAME = "Tribuna.com";
     public static final int COUNT_COMMANDS = 30;
-    public static final String USER = "surfakeemail@gmail.com";
+    public static final String USERNAME = "FakeUser";
+    public static final String SURNAME = "FakeSurname";
+    public static final String GENDER = "male";
+    public static final String USEREMAIL = "surfakeemail@gmail.com";
     public static final char [] PASS = new char[] {'c','W','F','6','d','3','N','4','M','T','U','5'};
   }

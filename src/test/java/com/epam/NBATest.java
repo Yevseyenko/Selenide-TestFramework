@@ -60,7 +60,7 @@ public class NBATest {
     public void verifyLoginToSite() {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
         nbaPO.clickLoginButton();
-        loginBO.loginUser(USER, PASS);
+        loginBO.loginUser(USEREMAIL, PASS);
         loginPO.clickLogin();
         Assert.assertTrue(nbaPO.isLoginedTabDisplayed(), "User is logged");
     }

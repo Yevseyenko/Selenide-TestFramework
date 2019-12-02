@@ -25,7 +25,7 @@ public class RestClient {
         this.specification.setBaseUri(EndPoints.domain);
     }
 
-    public void setHeaders(String token) {
+    private void setHeaders(String token) {
         this.specification.setAccept(ContentType.JSON)
                 .setContentType("application/json")
                 .addHeader("Authorization", "Bearer " + token);
@@ -37,6 +37,10 @@ public class RestClient {
 
     public Response postRequest() {
         return given(specification.build()).post(EndPoints.users);
+    }
+
+    public Response deleteRequest(String user) {
+        return given(specification.build()).delete(String.format(EndPoints.usersByName, user));
     }
 
     private void initBody(String firstName, String lastName, String gender, String email) {
@@ -62,5 +66,11 @@ public class RestClient {
         setHeaders(Propertiator.getTokenDomain());
         initBody(firstName, lastName, gender, email);
         return postRequest();
+    }
+
+    public Response deleteUser(String user) {
+        setDomain();
+        setHeaders(Propertiator.getTokenDomain());
+        return deleteRequest(user);
     }
 }
