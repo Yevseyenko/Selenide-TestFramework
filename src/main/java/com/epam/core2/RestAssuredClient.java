@@ -1,6 +1,7 @@
 package com.epam.core2;
 
 import ch.qos.logback.classic.Logger;
+import com.epam.core2.utils.Propertiator;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

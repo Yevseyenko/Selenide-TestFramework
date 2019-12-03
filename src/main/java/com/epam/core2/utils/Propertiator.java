@@ -1,4 +1,4 @@
-package com.epam.core2;
+package com.epam.core2.utils;
 
 import ch.qos.logback.classic.Logger;
 import org.apache.commons.configuration.ConfigurationException;
