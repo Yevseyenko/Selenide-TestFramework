@@ -61,6 +61,9 @@ public class RestAssuredClient implements Client {
         return getRequest();
     }
 
+    public Response createUser(String firstName){
+        return null;
+    }
     public Response createUser(String firstName, String lastName, String gender, String email) {
         setDomain();
         setHeaders(Propertiator.getTokenDomain());
