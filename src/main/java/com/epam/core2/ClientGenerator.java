@@ -4,8 +4,9 @@ public abstract class ClientGenerator {
    public static InterfaceClient getClient(String dataProviderClassName){
        if(dataProviderClassName.equals("NameDataProvider")){
            return new RestAssuredClient();
-       }else {
+       }else if(dataProviderClassName.equals("UserDataProvider")){
            return new RestAppacheClient();
-       }
+       }else
+           return new RestAssuredClient();
    }
 }

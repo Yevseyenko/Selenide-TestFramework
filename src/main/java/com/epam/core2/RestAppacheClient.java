@@ -1,14 +1,17 @@
 package com.epam.core2;
 
 import ch.qos.logback.classic.Logger;
+import com.epam.core2.model.User;
 import com.epam.core2.utils.Propertiator;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
@@ -50,9 +53,23 @@ public class RestAppacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet(EndPoints.domain+EndPoints.users);
+        HttpGet httpGet = new HttpGet(EndPoints.domain + EndPoints.users);
         try {
-             httpResponse= httpClient.execute(httpGet);
+            httpResponse = httpClient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return httpResponse;
+    }
+
+    public HttpResponse post(String payload) {
+        setBasicClientHeaders(Propertiator.getTokenDomain());
+        buildClient();
+        HttpResponse httpResponse = null;
+        HttpPost httpPost = new HttpPost(EndPoints.domain + EndPoints.users);
+        httpPost.setEntity(createEntity(payload));
+        try {
+            httpResponse = httpClient.execute(httpPost);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,7 +82,7 @@ public class RestAppacheClient implements InterfaceClient {
         BufferedReader rd = new BufferedReader(new InputStreamReader(restAppacheClient.get().getEntity().getContent()));
         String line = "";
         while ((line = rd.readLine()) != null) {
-            line+=line;
+            line += line;
         }
         System.out.println(line);
     }
@@ -77,8 +94,9 @@ public class RestAppacheClient implements InterfaceClient {
     }
 
     @Override
-    public String getCreateUserStatusCode(String payload) {
-        return null;
+    public int getCreateUserStatusCode(User user) {
+        Gson gson = new Gson();
+        return post(gson.toJson(user)).getStatusLine().getStatusCode();
     }
 
     @Override

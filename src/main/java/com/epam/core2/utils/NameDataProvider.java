@@ -19,8 +19,8 @@ public class NameDataProvider {
         return stringList;
     }
 
-    private static Object[][] generateDimensionArray( String testName) {
-        List<String> listString = readCSV( testName);
+    private static Object[][] generateDimensionArray(String testName) {
+        List<String> listString = readCSV(testName);
         Object[][] objArray = new Object[listString.size()][];
         for (int i = 0; i < listString.size(); i++) {
             objArray[i] = new Object[1];
@@ -30,8 +30,7 @@ public class NameDataProvider {
     }
 
     @org.testng.annotations.DataProvider
-    public static Object[][] searchWords(Method method) {
-        System.out.println(method.getName());
+    public static Object[][] userNames(Method method) {
         return generateDimensionArray(method.getName());
     }
 }

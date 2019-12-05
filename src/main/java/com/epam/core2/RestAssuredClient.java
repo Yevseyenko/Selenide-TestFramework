@@ -1,7 +1,9 @@
 package com.epam.core2;
 
 import ch.qos.logback.classic.Logger;
+import com.epam.core2.model.User;
 import com.epam.core2.utils.Propertiator;
+import com.google.gson.Gson;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -26,6 +28,10 @@ public class RestAssuredClient implements InterfaceClient {
         this.specification.setBaseUri(EndPoints.domain);
     }
 
+    public void setEndPoint() {
+        this.specification.setBaseUri(EndPoints.domain + EndPoints.users);
+    }
+
     private void setHeaders(String token) {
         this.specification.setAccept(ContentType.JSON)
                 .setContentType("application/json")
@@ -33,7 +39,7 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     public Response getRequest() {
-        return given(specification.build()).get(EndPoints.users);
+        return given(specification.build()).get();
     }
 
     public Response postRequest() {
@@ -56,15 +62,28 @@ public class RestAssuredClient implements InterfaceClient {
         this.specification.setBody(String.format(body, firstName, lastName, gender, email));
     }
 
+    public void initBody(User user) {
+        Gson gson = new Gson();
+        this.specification.setBody(gson.toJson(user));
+    }
+
     public Response getUsers() {
-        setDomain();
+        setEndPoint();
         setHeaders(Propertiator.getTokenDomain());
         return getRequest();
     }
 
-    public Response createUser(String firstName){
+    public Response createUser(String firstName) {
         return null;
     }
+
+    public Response createUser(User user) {
+        setDomain();
+        setHeaders(Propertiator.getTokenDomain());
+        initBody(user);
+        return postRequest();
+    }
+
     public Response createUser(String firstName, String lastName, String gender, String email) {
         setDomain();
         setHeaders(Propertiator.getTokenDomain());
@@ -80,12 +99,15 @@ public class RestAssuredClient implements InterfaceClient {
 
     @Override
     public String getUsersStatusCode() {
-        return null;
+        return String.valueOf(getUsers().then().extract().statusCode());
     }
 
     @Override
-    public String getCreateUserStatusCode(String payload) {
-        return null;
+    public int getCreateUserStatusCode(User user) {
+        return createUser(user)
+                .then()
+                .extract()
+                .statusCode();
     }
 
     @Override
@@ -95,6 +117,11 @@ public class RestAssuredClient implements InterfaceClient {
 
     @Override
     public String getDeleteUserStatusCode(String userName) {
-       return String.valueOf(deleteUser(userName).then().extract().statusCode());
+        return String.valueOf(deleteUser(userName).then().extract().statusCode());
+    }
+
+    public static void main(String[] args) {
+        RestAssuredClient restAssuredClient = new RestAssuredClient();
+        System.out.println(restAssuredClient.getDeleteUserStatusCode("Bohdan"));
     }
 }
