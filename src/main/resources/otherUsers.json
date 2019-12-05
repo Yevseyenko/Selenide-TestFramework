@@ -1,0 +1,37 @@
+[
+  {
+    "first_name": "Boris",
+    "last_name": "Itskovich",
+    "gender": "male",
+    "email": "surfake@gmail.com",
+    "status": "active"
+  },
+  {
+    "first_name": "Fake",
+    "last_name": "Ignat",
+    "gender": "male",
+    "email": "surfake1@gmail.com",
+    "status": "active"
+  },
+  {
+    "first_name": "Kirgiz",
+    "last_name": "Valera",
+    "gender": "male",
+    "email": "valera@gmail.com",
+    "status": "active"
+  },
+  {
+    "first_name": "Udmurt",
+    "last_name": "Petrovich",
+    "gender": "male",
+    "email": "udmurtio@gmail.com",
+    "status": "active"
+  },
+  {
+    "first_name": "Paolo",
+    "last_name": "Miguel",
+    "gender": "male",
+    "email": "surpablo@gmail.com",
+    "status": "active"
+  }
+]

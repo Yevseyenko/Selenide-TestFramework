@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
 
-public class RestAssuredClient implements Client {
+public class RestAssuredClient implements InterfaceClient {
     Logger logger =
             (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
 
@@ -76,5 +76,25 @@ public class RestAssuredClient implements Client {
         setDomain();
         setHeaders(Propertiator.getTokenDomain());
         return deleteRequest(user);
+    }
+
+    @Override
+    public String getUsersStatusCode() {
+        return null;
+    }
+
+    @Override
+    public String getCreateUserStatusCode(String payload) {
+        return null;
+    }
+
+    @Override
+    public String getUserByFirstNameStatusCode(String userName) {
+        return null;
+    }
+
+    @Override
+    public String getDeleteUserStatusCode(String userName) {
+       return String.valueOf(deleteUser(userName).then().extract().statusCode());
     }
 }

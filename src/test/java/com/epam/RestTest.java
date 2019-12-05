@@ -1,6 +1,10 @@
 package com.epam;
 
+import com.epam.core2.ClientGenerator;
+import com.epam.core2.InterfaceClient;
 import com.epam.core2.RestAssuredClient;
+import com.epam.core2.utils.NameDataProvider;
+import com.epam.utils.Definer;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,10 +27,10 @@ public class RestTest {
         Assert.assertTrue(rs.then().extract().body().toString().contains(USERNAME), "User is created");
     }
 
-    @Test
-    public void deleteUserTest() {
-        RestAssuredClient restAssuredClient = new RestAssuredClient();
-        Response rs = restAssuredClient.deleteUser(USERNAME);
-        Assert.assertEquals(rs.then().extract().statusCode(), 200, "Request failed");
+    @Test(dataProvider = "searchWords", dataProviderClass = NameDataProvider.class)
+    public void deleteUserTest(String user) throws NoSuchFieldException, NoSuchMethodException {
+        InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("deleteUserTest"));
+        client.getDeleteUserStatusCode(user);
+        Assert.assertEquals(client.getDeleteUserStatusCode(user), "400", "Request failed");
     }
 }
