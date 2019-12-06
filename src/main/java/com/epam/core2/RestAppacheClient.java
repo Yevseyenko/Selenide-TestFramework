@@ -104,7 +104,7 @@ public class RestAppacheClient implements InterfaceClient {
         System.out.println(line);
     }
 
-    public String getContent(HttpResponse httpResponse) {
+    private String getContent(HttpResponse httpResponse) {
         String line = "";
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
@@ -117,7 +117,7 @@ public class RestAppacheClient implements InterfaceClient {
         return line;
     }
 
-    public HttpResponse getByUserName(String name) {
+    private HttpResponse getByUserName(String name) {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;

@@ -1,6 +1,5 @@
 package com.epam;
 
-import ch.qos.logback.core.net.server.Client;
 import com.epam.core2.ClientGenerator;
 import com.epam.core2.InterfaceClient;
 import com.epam.core2.RestAssuredClient;
@@ -17,7 +16,7 @@ public class RestTest {
     @Test
     public void responcnseCodeTest() {
         RestAssuredClient restAssuredClient = new RestAssuredClient();
-        Assert.assertEquals(restAssuredClient.getUsersStatusCode(), "200", "Request failed");
+        Assert.assertEquals(restAssuredClient.getUsersStatusCode(), 200, "Request failed");
     }
 
     @Test(dataProvider = "userNames", dataProviderClass = NameDataProvider.class)
@@ -25,7 +24,6 @@ public class RestTest {
         InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("getUserByName"));
         Assert.assertTrue(client.getUserByFirstNameResponse(user).contains("200"), "Request failed");
     }
-
 
     @Test(priority = 4, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void createUserTest(User user) {

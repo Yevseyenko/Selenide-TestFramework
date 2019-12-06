@@ -46,11 +46,11 @@ public class RestAssuredClient implements InterfaceClient {
         return given(specification.build()).get();
     }
 
-    public Response postRequest() {
+    private Response postRequest() {
         return given(specification.build()).post(EndPoints.users);
     }
 
-    public Response deleteRequest(String user) {
+    private Response deleteRequest(String user) {
         return given(specification.build()).delete(String.format(EndPoints.usersByName, user));
     }
 
@@ -97,7 +97,7 @@ public class RestAssuredClient implements InterfaceClient {
         return postRequest();
     }
 
-    public Response deleteUser(String user) {
+    private Response deleteUser(String user) {
         setDomain();
         setHeaders(Propertiator.getTokenDomain());
         return deleteRequest(user);
