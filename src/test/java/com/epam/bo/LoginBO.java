@@ -6,6 +6,8 @@ import com.epam.utils.Utils;
 import org.slf4j.LoggerFactory;
 
 public class LoginBO {
+    //again
+
     Logger logger =
             (ch.qos.logback.classic.Logger) LoggerFactory.getLogger("com.epam.page");
     private LoginPO loginPO = new LoginPO();

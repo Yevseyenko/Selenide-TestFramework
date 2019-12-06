@@ -23,6 +23,8 @@ import static com.epam.core.constants.Constants.*;
 @Listeners({Listener.class, TestListenerAdapter.class})
 
 public class NBATest {
+
+    //todo fix unused var
     Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
     private LoginBO loginBO = new LoginBO();
     private LoginPO loginPO = new LoginPO();
@@ -41,6 +43,7 @@ public class NBATest {
     @Test(priority = 1,description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
         nbaPO.clickDefaultBtn();
+        //move asserts to page Object
         Assert.assertEquals(nbaBO.getLogoHeaderText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
@@ -77,6 +80,7 @@ public class NBATest {
         nbaPO.clickCalendarBtn();
         calendarPO.clickPreviousBtn();
         calendarBO.getScores();
+        //todo create lazy asserts from scratch
         Assert.assertTrue(calendarPO.isCalenadrBtnDisplayed(), "Calendar button isn't displayed");
         Assert.assertTrue(calendarPO.isFinalTableDisplayed(), "Final table isn't displayed");
     }

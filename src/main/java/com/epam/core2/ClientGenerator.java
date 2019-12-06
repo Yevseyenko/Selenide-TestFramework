@@ -1,4 +1,5 @@
 package com.epam.core2;
+//TODO fix core2, all names should have information under it
 
 public abstract class ClientGenerator {
    public static InterfaceClient getClient(String dataProviderClassName){

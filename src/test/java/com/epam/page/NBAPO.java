@@ -15,6 +15,7 @@ public class NBAPO {
 
     private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,' tribuna')]"));
 
+    //why static?
     private static String inputSearchLocator = "form[action*=\"tr\"]>input.search-block__input";
 
     private static String resultsLocator = "div.search-result";

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPO {
+    //unused var
     Logger logger =
             (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
     private SelenideElement userNameInput = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'email')]"));
