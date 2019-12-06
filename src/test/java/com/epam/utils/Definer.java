@@ -7,6 +7,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public class Definer {
+    //very informative name, again
     public static String getDataProviderName(String methodName) {
         Method method = null;
         try {
