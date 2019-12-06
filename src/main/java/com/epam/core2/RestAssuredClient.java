@@ -28,8 +28,12 @@ public class RestAssuredClient implements InterfaceClient {
         this.specification.setBaseUri(EndPoints.domain);
     }
 
-    public void setEndPoint() {
+    private void setEndPoint() {
         this.specification.setBaseUri(EndPoints.domain + EndPoints.users);
+    }
+
+    private void setUserEndPoint(String user) {
+        this.specification.setBaseUri(EndPoints.domain + EndPoints.usersByName + user);
     }
 
     private void setHeaders(String token) {
@@ -38,7 +42,7 @@ public class RestAssuredClient implements InterfaceClient {
                 .addHeader("Authorization", "Bearer " + token);
     }
 
-    public Response getRequest() {
+    private Response getRequest() {
         return given(specification.build()).get();
     }
 
@@ -73,15 +77,17 @@ public class RestAssuredClient implements InterfaceClient {
         return getRequest();
     }
 
-    public Response createUser(String firstName) {
-        return null;
-    }
-
     public Response createUser(User user) {
         setDomain();
         setHeaders(Propertiator.getTokenDomain());
         initBody(user);
         return postRequest();
+    }
+
+    public Response getUserByName(String name) {
+        setUserEndPoint(name);
+        setHeaders(Propertiator.getTokenDomain());
+        return getRequest();
     }
 
     public Response createUser(String firstName, String lastName, String gender, String email) {
@@ -98,8 +104,8 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     @Override
-    public String getUsersStatusCode() {
-        return String.valueOf(getUsers().then().extract().statusCode());
+    public int getUsersStatusCode() {
+        return getUsers().then().extract().statusCode();
     }
 
     @Override
@@ -111,17 +117,17 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     @Override
-    public String getUserByFirstNameStatusCode(String userName) {
-        return null;
+    public String getUserByFirstNameResponse(String userName) {
+        return getUserByName(userName).then().extract().body().asString();
     }
 
     @Override
-    public String getDeleteUserStatusCode(String userName) {
-        return String.valueOf(deleteUser(userName).then().extract().statusCode());
+    public int getDeleteUserStatusCode(String userName) {
+        return deleteUser(userName).then().extract().statusCode();
     }
 
     public static void main(String[] args) {
         RestAssuredClient restAssuredClient = new RestAssuredClient();
-        System.out.println(restAssuredClient.getDeleteUserStatusCode("Bohdan"));
+        System.out.println(restAssuredClient.getUserByFirstNameResponse("John"));
     }
 }

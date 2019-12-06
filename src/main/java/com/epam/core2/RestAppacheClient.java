@@ -10,6 +10,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -49,7 +50,7 @@ public class RestAppacheClient implements InterfaceClient {
         return httpEntity;
     }
 
-    public HttpResponse get() {
+    private HttpResponse get() {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
@@ -62,7 +63,7 @@ public class RestAppacheClient implements InterfaceClient {
         return httpResponse;
     }
 
-    public HttpResponse post(String payload) {
+    private HttpResponse post(String payload) {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
@@ -70,6 +71,22 @@ public class RestAppacheClient implements InterfaceClient {
         httpPost.setEntity(createEntity(payload));
         try {
             httpResponse = httpClient.execute(httpPost);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return httpResponse;
+    }
+
+    private HttpDelete basicDelete(String user) {
+        return new HttpDelete(EndPoints.domain + EndPoints.usersByName + user);
+    }
+
+    private HttpResponse delete(String user) {
+        setBasicClientHeaders(Propertiator.getTokenDomain());
+        buildClient();
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = httpClient.execute(basicDelete(user));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,10 +104,35 @@ public class RestAppacheClient implements InterfaceClient {
         System.out.println(line);
     }
 
+    public String getContent(HttpResponse httpResponse) {
+        String line = "";
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+            while ((line = rd.readLine()) != null) {
+                line += line;
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return line;
+    }
+
+    public HttpResponse getByUserName(String name) {
+        setBasicClientHeaders(Propertiator.getTokenDomain());
+        buildClient();
+        HttpResponse httpResponse = null;
+        HttpGet httpGet = new HttpGet(EndPoints.domain + EndPoints.usersByName);
+        try {
+            httpResponse = httpClient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return httpResponse;
+    }
 
     @Override
-    public String getUsersStatusCode() {
-        return null;
+    public int getUsersStatusCode() {
+        return get().getStatusLine().getStatusCode();
     }
 
     @Override
@@ -100,12 +142,12 @@ public class RestAppacheClient implements InterfaceClient {
     }
 
     @Override
-    public String getUserByFirstNameStatusCode(String userName) {
-        return null;
+    public String getUserByFirstNameResponse(String userName) {
+        return getContent(getByUserName(userName));
     }
 
     @Override
-    public String getDeleteUserStatusCode(String userName) {
-        return null;
+    public int getDeleteUserStatusCode(String user) {
+        return delete(user).getStatusLine().getStatusCode();
     }
 }
