@@ -11,16 +11,15 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class NBAPO {
+public class NbaPO {
 
     private SelenideElement logoHeader = $(By.xpath("//a[contains(@class,' tribuna')]"));
 
-    //why static?
-    private static String inputSearchLocator = "form[action*=\"tr\"]>input.search-block__input";
+    private String inputSearchLocator = "form[action*=\"tr\"]>input.search-block__input";
 
-    private static String resultsLocator = "div.search-result";
+    private String resultsLocator = "div.search-result";
 
-    private static SelenideElement inputSearch = $(inputSearchLocator);
+    private SelenideElement inputSearch = $(inputSearchLocator);
 
     private SelenideElement searchButon = $("form[action*=\"tr\"]>button");
 
@@ -43,7 +42,7 @@ public class NBAPO {
     private SelenideElement defaultVersion = $("span[data-ng-i18next*=\"editionLabel\"]");
 
     @Step("Waiting for input Search")
-    public NBAPO inputValueToSearch(String value) {
+    public NbaPO inputValueToSearch(String value) {
         Waiter.fluentWait(inputSearchLocator, LocatorTypeEnum.CSS);
         inputSearch.setValue(value);
         return this;

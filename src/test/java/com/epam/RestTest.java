@@ -6,7 +6,7 @@ import com.epam.core2.RestAssuredClient;
 import com.epam.core2.model.User;
 import com.epam.core2.utils.NameDataProvider;
 import com.epam.core2.utils.UserDataProvider;
-import com.epam.utils.Definer;
+import com.epam.utils.DataProviderAnalyzer;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -21,7 +21,7 @@ public class RestTest {
 
     @Test(dataProvider = "userNames", dataProviderClass = NameDataProvider.class)
     public void getUserByName(String user) {
-        InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("getUserByName"));
+        InterfaceClient client = ClientGenerator.getClient(DataProviderAnalyzer.getDataProviderName("getUserByName"));
         Assert.assertTrue(client.getUserByFirstNameResponse(user).contains("200"), "Request failed");
     }
 
@@ -34,25 +34,25 @@ public class RestTest {
 
     @Test(priority = 1, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void createUsersTest(User user) {
-        InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("deleteUserTest"));
+        InterfaceClient client = ClientGenerator.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
         Assert.assertEquals(client.getCreateUserStatusCode(user), 200, "Request failed ");
     }
 
     @Test(priority = 2, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void getUsersByNameTest(User user) {
-        InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("deleteUserTest"));
+        InterfaceClient client = ClientGenerator.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
         Assert.assertTrue(client.getUserByFirstNameResponse(user.getFirst_name()).contains(user.getFirst_name()), "Request failed ");
     }
 
     @Test(priority = 3, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void deleteUserTest(User user) {
-        InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("deleteUserTest"));
+        InterfaceClient client = ClientGenerator.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
         Assert.assertEquals(client.getDeleteUserStatusCode(user.getFirst_name()), 200, "Request failed");
     }
 
     @Test(priority = 5, dataProvider = "userNames", dataProviderClass = NameDataProvider.class)
     public void deleteUserTest(String user) {
-        InterfaceClient client = ClientGenerator.getClient(Definer.getDataProviderName("deleteUserTest"));
+        InterfaceClient client = ClientGenerator.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
         Assert.assertEquals(client.getDeleteUserStatusCode(user), 200, "Request failed");
     }
 }

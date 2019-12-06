@@ -15,4 +15,5 @@ public class Constants {
     public static final String GENDER = "male";
     public static final String USEREMAIL = "surfakeemail@gmail.com";
     public static final char [] PASS = new char[] {'c','W','F','6','d','3','N','4','M','T','U','5'};
-  }
+    public static final int RETRY_LIMIT =4;
+      }

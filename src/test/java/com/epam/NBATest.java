@@ -3,7 +3,7 @@ package com.epam;
 import ch.qos.logback.classic.Logger;
 import com.epam.bo.CalendarBO;
 import com.epam.bo.LoginBO;
-import com.epam.bo.NBABO;
+import com.epam.bo.NbaBO;
 import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
 import com.epam.page.TribunaPO;
@@ -14,7 +14,7 @@ import org.testng.TestListenerAdapter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.epam.page.NBAPO;
+import com.epam.page.NbaPO;
 import com.epam.core.testng.Listener;
 
 
@@ -30,8 +30,8 @@ public class NBATest {
     private LoginPO loginPO = new LoginPO();
     private CalendarBO calendarBO = new CalendarBO();
     private CalendarPO calendarPO = new CalendarPO();
-    private NBAPO nbaPO = new NBAPO();
-    private NBABO nbaBO = new NBABO();
+    private NbaPO nbaPO = new NbaPO();
+    private NbaBO nbaBO = new NbaBO();
     private TribunaPO tribunaPO = new TribunaPO();
 
     @BeforeClass

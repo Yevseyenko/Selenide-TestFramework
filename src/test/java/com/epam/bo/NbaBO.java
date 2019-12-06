@@ -1,12 +1,12 @@
 package com.epam.bo;
 
-import com.epam.page.NBAPO;
+import com.epam.page.NbaPO;
 
 import java.util.List;
 
-public class NBABO {//very understandible name, in the best practices I feel it
-    //default modifier
-    NBAPO nbaPO = new NBAPO();
+public class NbaBO {//very understandible name, in the best practices I feel it
+
+    public NbaPO nbaPO = new NbaPO();
 
     public String getLogoHeaderText() {
         return nbaPO.getLogoHeader().getText();

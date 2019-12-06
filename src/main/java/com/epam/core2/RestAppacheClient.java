@@ -93,17 +93,6 @@ public class RestAppacheClient implements InterfaceClient {
         return httpResponse;
     }
 
-    public static void main(String[] args) throws IOException {
-        RestAppacheClient restAppacheClient = new RestAppacheClient();
-        System.out.println(restAppacheClient.get().getEntity().toString());
-        BufferedReader rd = new BufferedReader(new InputStreamReader(restAppacheClient.get().getEntity().getContent()));
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            line += line;
-        }
-        System.out.println(line);
-    }
-
     private String getContent(HttpResponse httpResponse) {
         String line = "";
         try {
