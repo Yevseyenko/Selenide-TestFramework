@@ -1,4 +1,4 @@
-package com.epam.core2.utils;
+package com.epam.core2.data;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

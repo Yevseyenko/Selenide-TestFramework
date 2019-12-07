@@ -1,7 +1,7 @@
-package com.epam.core2;
+package com.epam.core2.client;
 //TODO fix core2, all names should have information under it
 
-public abstract class ClientGenerator {
+public abstract class ClientResolver {
    public static InterfaceClient getClient(String dataProviderClassName){
        if(dataProviderClassName.equals("NameDataProvider")){
            return new RestAssuredClient();

@@ -4,9 +4,12 @@ import ch.qos.logback.classic.Logger;
 import com.epam.bo.CalendarBO;
 import com.epam.bo.LoginBO;
 import com.epam.bo.NbaBO;
+import com.epam.core.testng.Listener;
 import com.epam.page.CalendarPO;
 import com.epam.page.LoginPO;
+import com.epam.page.NbaPO;
 import com.epam.page.TribunaPO;
+import com.epam.utils.LazyAssert;
 import com.epam.utils.SelenideConfigurator;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -14,9 +17,6 @@ import org.testng.TestListenerAdapter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import com.epam.page.NbaPO;
-import com.epam.core.testng.Listener;
-
 
 import static com.epam.core.constants.Constants.*;
 
@@ -33,6 +33,7 @@ public class NBATest {
     private NbaPO nbaPO = new NbaPO();
     private NbaBO nbaBO = new NbaBO();
     private TribunaPO tribunaPO = new TribunaPO();
+    private LazyAssert lazyAssert = new LazyAssert();
 
     @BeforeClass
     public void setup() {
@@ -40,20 +41,19 @@ public class NBATest {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
     }
 
-    @Test(priority = 1,description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
+    @Test(priority = 1, description = "Scenario with verifying name logo", retryAnalyzer = com.epam.utils.RetryAnalyzer.class)
     public void verifyTribunaNameTest() {
         nbaPO.clickDefaultBtn();
-        //move asserts to page Object
         Assert.assertEquals(nbaBO.getLogoHeaderText(), TEST_SITE_NAME, "Logo headeers are not equal");
     }
 
-    @Test(priority = 2,description = "Scenario with verifying count of commands")
+    @Test(priority = 2, description = "Scenario with verifying count of commands")
     public void verifyCountOfCommands() {
         nbaPO.clickCommandsButton();
         Assert.assertEquals(nbaBO.getCommandListSize(), COUNT_COMMANDS, "Count of commands is not equal");
     }
 
-    @Test(priority = 3,description = "Scenario with verifying Global list")
+    @Test(priority = 3, description = "Scenario with verifying Global list")
     public void verifyGloablList() {
         nbaPO.clickGlobalButton();
         Assert.assertEquals(nbaBO.getGlobalList(), VERIFY_GLOBAL_LIST, "Lists are not same");
@@ -80,8 +80,8 @@ public class NBATest {
         nbaPO.clickCalendarBtn();
         calendarPO.clickPreviousBtn();
         calendarBO.getScores();
-        //todo create lazy asserts from scratch
-        Assert.assertTrue(calendarPO.isCalenadrBtnDisplayed(), "Calendar button isn't displayed");
-        Assert.assertTrue(calendarPO.isFinalTableDisplayed(), "Final table isn't displayed");
+        lazyAssert.assertTrue(calendarPO.isCalenadrBtnDisplayed(), "Calendar button isn't displayed");
+        lazyAssert.assertTrue(calendarPO.isFinalTableDisplayed(), "Final table isn't displayed");
+        lazyAssert.assertAll();
     }
 }

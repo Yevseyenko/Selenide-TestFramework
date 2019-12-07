@@ -4,7 +4,7 @@ import com.epam.page.NbaPO;
 
 import java.util.List;
 
-public class NbaBO {//very understandible name, in the best practices I feel it
+public class NbaBO {
 
     public NbaPO nbaPO = new NbaPO();
 

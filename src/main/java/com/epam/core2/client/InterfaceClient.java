@@ -1,4 +1,4 @@
-package com.epam.core2;
+package com.epam.core2.client;
 
 import com.epam.core2.model.User;
 

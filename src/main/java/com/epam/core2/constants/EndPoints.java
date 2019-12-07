@@ -1,4 +1,4 @@
-package com.epam.core2;
+package com.epam.core2.constants;
 
 public class EndPoints {
     public static final String domain = "https://gorest.co.in";

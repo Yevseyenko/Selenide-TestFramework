@@ -1,6 +1,7 @@
-package com.epam.core2;
+package com.epam.core2.client;
 
 import ch.qos.logback.classic.Logger;
+import com.epam.core2.constants.EndPoints;
 import com.epam.core2.model.User;
 import com.epam.core2.utils.Propertiator;
 import com.google.common.collect.Lists;
@@ -27,7 +28,7 @@ import java.util.List;
 public class RestAppacheClient implements InterfaceClient {
     private List<Header> headers;
     private HttpClient httpClient;
-    Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
+    private Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
 
     private void setBasicClientHeaders(String token) {
         this.headers = Lists.newArrayList(

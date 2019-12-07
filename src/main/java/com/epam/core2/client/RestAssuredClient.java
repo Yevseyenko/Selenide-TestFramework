@@ -1,6 +1,7 @@
-package com.epam.core2;
+package com.epam.core2.client;
 
 import ch.qos.logback.classic.Logger;
+import com.epam.core2.constants.EndPoints;
 import com.epam.core2.model.User;
 import com.epam.core2.utils.Propertiator;
 import com.google.gson.Gson;

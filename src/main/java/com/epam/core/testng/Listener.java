@@ -1,8 +1,6 @@
 package com.epam.core.testng;
 
 
-//try this listener also AbstractWebDriverEventListener, try to mesh them
-
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.*;
@@ -18,7 +16,6 @@ public class Listener implements ITestListener, ISuiteListener, IInvokedMethodLi
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
-
     }
 
     @Override

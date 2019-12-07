@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class CalendarBO {
 
-    public Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
-    public CalendarPO calendarPO = new CalendarPO();
+    private Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
+    private CalendarPO calendarPO = new CalendarPO();
 
     @Step("Getting scores from table")
     public void getScores() {

@@ -6,7 +6,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.LoggerFactory;
 
 public class Propertiator {
-    Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
+    private static Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Propertiator.class);
     private static final String path = System.getProperty("user.dir") + "/src/main/resources/application.properties";
 
     private static String getPropertie(String name) {
@@ -15,6 +15,7 @@ public class Propertiator {
             properties = new PropertiesConfiguration(path);
         } catch (ConfigurationException e) {
             e.printStackTrace();
+            logger.error("Can't get property: " + name);
         }
         return properties.getProperty(name).toString();
     }

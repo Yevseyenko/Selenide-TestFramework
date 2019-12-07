@@ -1,4 +1,4 @@
-package com.epam.core2.utils;
+package com.epam.core2.data;
 
 import com.epam.core2.model.User;
 import com.paypal.selion.platform.dataprovider.DataProviderFactory;

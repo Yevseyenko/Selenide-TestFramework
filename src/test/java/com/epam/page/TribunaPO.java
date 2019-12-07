@@ -12,6 +12,7 @@ public class TribunaPO {
 
     private SelenideElement nbaBtn = $(By.xpath("//li[contains(@class,'nav')]/a[contains(@href,'nba/')]"));
 
+    @Step("Hover on NBA Button")
     public TribunaPO hoverBasketBtn() {
         basketButton.hover();
         return this;
