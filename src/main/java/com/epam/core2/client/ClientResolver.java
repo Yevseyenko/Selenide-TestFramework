@@ -6,7 +6,7 @@ public abstract class ClientResolver {
        if(dataProviderClassName.equals("NameDataProvider")){
            return new RestAssuredClient();
        }else if(dataProviderClassName.equals("UserDataProvider")){
-           return new RestAppacheClient();
+           return new RestApacheClient();
        }else
            return new RestAssuredClient();
    }

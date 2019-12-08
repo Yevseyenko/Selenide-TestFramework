@@ -2,9 +2,10 @@ package com.epam.core2.client;
 
 import ch.qos.logback.classic.Logger;
 import com.epam.core2.constants.EndPoints;
-import com.epam.core2.model.User;
+import com.epam.core2.models.User;
+import com.epam.core2.utils.JsonUtils;
 import com.epam.core2.utils.Propertiator;
-import com.google.gson.Gson;
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -19,22 +20,24 @@ import java.util.stream.Stream;
 import static io.restassured.RestAssured.given;
 
 public class RestAssuredClient implements InterfaceClient {
-    Logger logger =
+
+    private Logger logger =
             (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
 
     private RequestSpecBuilder specification = new RequestSpecBuilder();
 
-    private void setDomain() {
+
+    private void setBasePath() {
         logger.info("Request executed to: " + EndPoints.domain);
-        this.specification.setBaseUri(EndPoints.domain);
+        RestAssured.basePath = EndPoints.domain;
     }
 
     private void setEndPoint() {
-        this.specification.setBaseUri(EndPoints.domain + EndPoints.users);
+        this.specification.setBaseUri(EndPoints.users);
     }
 
     private void setUserEndPoint(String user) {
-        this.specification.setBaseUri(EndPoints.domain + EndPoints.usersByName + user);
+        this.specification.setBaseUri(EndPoints.usersByName + user);
     }
 
     private void setHeaders(String token) {
@@ -43,8 +46,8 @@ public class RestAssuredClient implements InterfaceClient {
                 .addHeader("Authorization", "Bearer " + token);
     }
 
-    private Response getRequest() {
-        return given(specification.build()).get();
+    private Response getRequest(String name) {
+        return given(specification.build()).get(EndPoints.usersByName + name);
     }
 
     private Response postRequest() {
@@ -53,6 +56,10 @@ public class RestAssuredClient implements InterfaceClient {
 
     private Response deleteRequest(String user) {
         return given(specification.build()).delete(String.format(EndPoints.usersByName, user));
+    }
+
+    public RequestSpecBuilder getSpecification() {
+        return specification;
     }
 
     private void initBody(String firstName, String lastName, String gender, String email) {
@@ -67,19 +74,18 @@ public class RestAssuredClient implements InterfaceClient {
         this.specification.setBody(String.format(body, firstName, lastName, gender, email));
     }
 
-    public void initBody(User user) {
-        Gson gson = new Gson();
-        this.specification.setBody(gson.toJson(user));
+    private void initBody(User user) {
+        this.specification.setBody(JsonUtils.getJsonStringFromObject(user));
     }
 
     public Response getUsers() {
         setEndPoint();
         setHeaders(Propertiator.getTokenDomain());
-        return getRequest();
+        return null;
     }
 
     public Response createUser(User user) {
-        setDomain();
+        setBasePath();
         setHeaders(Propertiator.getTokenDomain());
         initBody(user);
         return postRequest();
@@ -88,18 +94,17 @@ public class RestAssuredClient implements InterfaceClient {
     public Response getUserByName(String name) {
         setUserEndPoint(name);
         setHeaders(Propertiator.getTokenDomain());
-        return getRequest();
+        return getRequest(name);
     }
 
     public Response createUser(String firstName, String lastName, String gender, String email) {
-        setDomain();
         setHeaders(Propertiator.getTokenDomain());
         initBody(firstName, lastName, gender, email);
         return postRequest();
     }
 
     private Response deleteUser(String user) {
-        setDomain();
+        setBasePath();
         setHeaders(Propertiator.getTokenDomain());
         return deleteRequest(user);
     }
@@ -119,7 +124,7 @@ public class RestAssuredClient implements InterfaceClient {
 
     @Override
     public String getUserByFirstNameResponse(String userName) {
-        return getUserByName(userName).then().extract().body().asString();
+        return getUserByName(userName).then().extract().body().jsonPath().get("result").toString();
     }
 
     @Override

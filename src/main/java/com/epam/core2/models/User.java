@@ -1,4 +1,4 @@
-package com.epam.core2.model;
+package com.epam.core2.models;
 
 public class User {
 

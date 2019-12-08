@@ -7,7 +7,7 @@ import org.testng.*;
 
 
 public class Listener implements ITestListener, ISuiteListener, IInvokedMethodListener {
-    Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
+    private Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {

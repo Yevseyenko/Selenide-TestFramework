@@ -2,7 +2,7 @@ package com.epam.core2.client;
 
 import ch.qos.logback.classic.Logger;
 import com.epam.core2.constants.EndPoints;
-import com.epam.core2.model.User;
+import com.epam.core2.models.User;
 import com.epam.core2.utils.Propertiator;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class RestAppacheClient implements InterfaceClient {
+public class RestApacheClient implements InterfaceClient {
     private List<Header> headers;
     private HttpClient httpClient;
     private Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
@@ -55,7 +55,7 @@ public class RestAppacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet(EndPoints.domain + EndPoints.users);
+        HttpGet httpGet = new HttpGet( EndPoints.users);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
@@ -68,7 +68,7 @@ public class RestAppacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpPost httpPost = new HttpPost(EndPoints.domain + EndPoints.users);
+        HttpPost httpPost = new HttpPost( EndPoints.users);
         httpPost.setEntity(createEntity(payload));
         try {
             httpResponse = httpClient.execute(httpPost);
@@ -79,7 +79,7 @@ public class RestAppacheClient implements InterfaceClient {
     }
 
     private HttpDelete basicDelete(String user) {
-        return new HttpDelete(EndPoints.domain + EndPoints.usersByName + user);
+        return new HttpDelete(EndPoints.usersByName + user);
     }
 
     private HttpResponse delete(String user) {

@@ -3,28 +3,27 @@ package com.epam;
 import com.epam.core2.client.ClientResolver;
 import com.epam.core2.client.InterfaceClient;
 import com.epam.core2.client.RestAssuredClient;
-import com.epam.core2.model.User;
 import com.epam.core2.data.NameDataProvider;
 import com.epam.core2.data.UserDataProvider;
+import com.epam.core2.models.User;
 import com.epam.utils.DataProviderAnalyzer;
-import com.epam.utils.LazyAssert;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RestTest {
-    LazyAssert lazyAssert = new LazyAssert();
 
     @Test
-    public void responcnseCodeTest() {
-        RestAssuredClient restAssuredClient = new RestAssuredClient();
-        Assert.assertEquals(restAssuredClient.getUsersStatusCode(), 200, "Request failed");
+    public void responseCodeTest() {
+        InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("responseCodeTest"));
+        Assert.assertEquals(client.getUsersStatusCode(), 200, "Request failed");
     }
 
     @Test(dataProvider = "userNames", dataProviderClass = NameDataProvider.class)
     public void getUserByName(String user) {
         InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("getUserByName"));
-        Assert.assertTrue(client.getUserByFirstNameResponse(user).contains("200"), "Request failed");
+        String response = client.getUserByFirstNameResponse(user);
+        Assert.assertTrue(response.contains(user), "Request failed");
     }
 
     @Test(priority = 4, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
@@ -43,7 +42,8 @@ public class RestTest {
     @Test(priority = 2, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void getUsersByNameTest(User user) {
         InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
-        Assert.assertTrue(client.getUserByFirstNameResponse(user.getFirst_name()).contains(user.getFirst_name()), "Request failed ");
+        String response = client.getUserByFirstNameResponse(user.getFirst_name());
+        Assert.assertTrue(response.contains(user.getFirst_name()), "Request failed ");
     }
 
     @Test(priority = 3, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
