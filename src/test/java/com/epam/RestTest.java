@@ -30,12 +30,14 @@ public class RestTest {
     public void createUserTest(User user) {
         RestAssuredClient restAssuredClient = new RestAssuredClient();
         Response rs = restAssuredClient.createUser(user.getFirst_name(), user.getLast_name(), user.getGender(), user.getEmail());
+        System.out.println(rs.getBody());
         Assert.assertEquals(rs.then().extract().statusCode(), 200, "Request failed ");
     }
 
     @Test(priority = 1, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void createUsersTest(User user) {
         InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
+
         Assert.assertEquals(client.getCreateUserStatusCode(user), 200, "Request failed ");
     }
 

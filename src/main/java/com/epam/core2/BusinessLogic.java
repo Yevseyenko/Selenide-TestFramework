@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BusinessLogic {
     private static Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(BusinessLogic.class);
@@ -19,8 +21,9 @@ public class BusinessLogic {
         return getResponseModel(jsonString).getResult().get(0).getLastName();
     }
 
-    public static String getFromResponseUserEmail(String jsonString) {
-        return getResponseModel(jsonString).getResult().get(0).getEmail();
+    public static List<String> getFromResponseUserEmail(String jsonString) {
+        return  getResponseModel(jsonString).getResult().stream().map(x->x.getEmail()).collect(Collectors.toList());
+
     }
 
     private static ResponseModel getResponseModel(String jsonString) {
@@ -33,5 +36,9 @@ public class BusinessLogic {
         }
         Assert.assertFalse(responseModel == null, "Response is empty");
         return responseModel;
+    }
+
+    public static void main(String[] args) {
+      //  getFromResponseUserEmail()
     }
 }
