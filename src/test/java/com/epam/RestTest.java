@@ -1,5 +1,6 @@
 package com.epam;
 
+import com.epam.core2.BusinessLogic;
 import com.epam.core2.client.ClientResolver;
 import com.epam.core2.client.InterfaceClient;
 import com.epam.core2.client.RestAssuredClient;
@@ -59,4 +60,4 @@ public class RestTest {
         InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
         Assert.assertEquals(client.getDeleteUserStatusCode(user), 200, "Request failed");
     }
-}
+   }

@@ -81,7 +81,7 @@ public class RestAssuredClient implements InterfaceClient {
     public Response getUsers() {
         setEndPoint();
         setHeaders(Propertiator.getTokenDomain());
-        return null;
+       return given(specification.build()).get();
     }
 
     public Response createUser(User user) {
@@ -107,6 +107,10 @@ public class RestAssuredClient implements InterfaceClient {
         setBasePath();
         setHeaders(Propertiator.getTokenDomain());
         return deleteRequest(user);
+    }
+
+    public String getUsersResponse(){
+        return getUsers().then().extract().body().asString();
     }
 
     @Override
