@@ -1,6 +1,7 @@
 package com.epam.utils;
 
 import com.epam.RestTest;
+import com.epam.core2.models.User;
 import org.testng.annotations.Test;
 
 import java.lang.annotation.Annotation;
@@ -11,7 +12,7 @@ public class DataProviderAnalyzer {
     public static String getDataProviderName(String methodName) {
         Method method = null;
         try {
-            method = RestTest.class.getMethod(methodName, String.class);
+            method = RestTest.class.getMethod(methodName, User.class);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

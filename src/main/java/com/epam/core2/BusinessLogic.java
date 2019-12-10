@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 public class BusinessLogic {
     private static Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(BusinessLogic.class);
 
-    public static String getFromResponseUserFirstName(String jsonString) {
-        return getResponseModel(jsonString).getResult().get(0).getFirstName();
+    public static List<String> getFromResponseUserFirstName(String jsonString) {
+        return getResponseModel(jsonString).getResult().stream().map(x->x.getFirstName()).collect(Collectors.toList());
     }
 
-    public static String getFromResponseUserLastName(String jsonString) {
-        return getResponseModel(jsonString).getResult().get(0).getLastName();
+    public static List<String> getFromResponseUserLastName(String jsonString) {
+        return getResponseModel(jsonString).getResult().stream().map(x->x.getLastName()).collect(Collectors.toList());
     }
 
     public static List<String> getFromResponseUserEmail(String jsonString) {
