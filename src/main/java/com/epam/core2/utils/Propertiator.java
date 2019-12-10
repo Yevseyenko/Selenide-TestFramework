@@ -9,7 +9,7 @@ public class Propertiator {
     private static Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Propertiator.class);
     private static final String path = System.getProperty("user.dir") + "/src/main/resources/application.properties";
 
-    private static String getPropertie(String name) {
+    private static String getProperty(String name) {
         PropertiesConfiguration properties = null;
         try {
             properties = new PropertiesConfiguration(path);
@@ -21,6 +21,6 @@ public class Propertiator {
     }
 
     public static String getTokenDomain() {
-        return getPropertie("token");
+        return getProperty("token");
     }
 }

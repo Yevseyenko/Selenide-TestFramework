@@ -55,7 +55,7 @@ public class RestApacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet( EndPoints.users);
+        HttpGet httpGet = new HttpGet(EndPoints.users);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
@@ -68,7 +68,7 @@ public class RestApacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpPost httpPost = new HttpPost( EndPoints.users);
+        HttpPost httpPost = new HttpPost(EndPoints.users);
         httpPost.setEntity(createEntity(payload));
         try {
             httpResponse = httpClient.execute(httpPost);
@@ -111,13 +111,18 @@ public class RestApacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet(EndPoints.domain + EndPoints.usersByName);
+        HttpGet httpGet = new HttpGet(EndPoints.usersByName);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return httpResponse;
+    }
+
+    @Override
+    public String getUsersResponse() {
+        return null;
     }
 
     @Override
