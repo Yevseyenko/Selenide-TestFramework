@@ -121,6 +121,11 @@ public class RestApacheClient implements InterfaceClient {
     }
 
     @Override
+    public String getUsersResponse() {
+        return null;
+    }
+
+    @Override
     public int getUsersStatusCode() {
         return get().getStatusLine().getStatusCode();
     }

@@ -11,7 +11,7 @@ public class DataProviderAnalyzer {
     public static String getDataProviderName(String methodName) {
         Method method = null;
         try {
-            method = RestTest.class.getMethod("deleteUserTest", String.class);
+            method = RestTest.class.getMethod(methodName, String.class);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

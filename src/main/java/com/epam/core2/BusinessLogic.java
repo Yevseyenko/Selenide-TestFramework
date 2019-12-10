@@ -37,8 +37,4 @@ public class BusinessLogic {
         Assert.assertFalse(responseModel == null, "Response is empty");
         return responseModel;
     }
-
-    public static void main(String[] args) {
-      //  getFromResponseUserEmail()
-    }
 }

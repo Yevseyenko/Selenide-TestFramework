@@ -128,7 +128,7 @@ public class RestAssuredClient implements InterfaceClient {
 
     @Override
     public String getUserByFirstNameResponse(String userName) {
-        return getUserByName(userName).then().extract().body().jsonPath().get("result").toString();
+        return getUserByName(userName).then().extract().body().asString();
     }
 
     @Override

@@ -35,10 +35,17 @@ public class RestTest {
         Assert.assertEquals(rs.then().extract().statusCode(), 200, "Request failed ");
     }
 
+    @Test(priority = 6, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
+    public void verifyUserEmail(User user){
+        InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("getUserByName"));
+        String response = client.getUserByFirstNameResponse(user.getFirst_name());
+        Assert.assertTrue(BusinessLogic.getFromResponseUserEmail(response).contains(user.getEmail()),"Emails are not equal");
+    }
+
+
     @Test(priority = 1, dataProvider = "jsonDataProvider", dataProviderClass = UserDataProvider.class)
     public void createUsersTest(User user) {
         InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("deleteUserTest"));
-
         Assert.assertEquals(client.getCreateUserStatusCode(user), 200, "Request failed ");
     }
 
