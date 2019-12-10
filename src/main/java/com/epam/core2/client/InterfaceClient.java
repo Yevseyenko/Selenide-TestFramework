@@ -3,13 +3,13 @@ package com.epam.core2.client;
 import com.epam.core2.models.User;
 
 public interface InterfaceClient<T> {
-    public String getUsersResponse();
+    String getUsersResponse();
 
-    public int getUsersStatusCode();
+    int getUsersStatusCode();
 
-    public int getCreateUserStatusCode(User user);
+    int getCreateUserStatusCode(User user);
 
-    public String getUserByFirstNameResponse(String userName);
+    String getUserByFirstNameResponse(String userName);
 
-    public int getDeleteUserStatusCode(String user);
+    int getDeleteUserStatusCode(String user);
 }
