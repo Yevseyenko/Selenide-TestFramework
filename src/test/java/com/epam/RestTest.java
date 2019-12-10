@@ -21,8 +21,8 @@ public class RestTest {
     }
 
     @Test(dataProvider = "userNames", description = "Verifying user name scenario", dataProviderClass = NameDataProvider.class)
-    public void getUserByName(String user) {
-        InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("getUserByName"));
+    public void getUserByNameFromCSV(String user) {
+        InterfaceClient client = ClientResolver.getClient(DataProviderAnalyzer.getDataProviderName("getUserByNameFromCSV"));
         String response = client.getUserByFirstNameResponse(user);
         Assert.assertTrue(response.contains(user), "Request failed");
     }

@@ -12,7 +12,11 @@ public class DataProviderAnalyzer {
     public static String getDataProviderName(String methodName) {
         Method method = null;
         try {
-            method = RestTest.class.getMethod(methodName, User.class);
+            if (methodName.contains("CSV")) {
+                method = RestTest.class.getMethod(methodName, String.class);
+            } else {
+                method = RestTest.class.getMethod(methodName, User.class);
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
