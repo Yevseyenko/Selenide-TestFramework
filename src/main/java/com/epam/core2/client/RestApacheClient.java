@@ -17,6 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
@@ -52,9 +53,9 @@ public class RestApacheClient implements InterfaceClient {
     }
 
     private HttpResponse get() {
+        HttpResponse httpResponse = null;
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
-        HttpResponse httpResponse = null;
         HttpGet httpGet = new HttpGet(EndPoints.users);
         try {
             httpResponse = httpClient.execute(httpGet);
@@ -94,30 +95,29 @@ public class RestApacheClient implements InterfaceClient {
         return httpResponse;
     }
 
-    private String getContent(HttpResponse httpResponse) {
-        String line = "";
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
-            while ((line = rd.readLine()) != null) {
-                line += line;
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return line;
-    }
 
     private HttpResponse getByUserName(String name) {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet(EndPoints.usersByName);
+        HttpGet httpGet = new HttpGet(EndPoints.usersByName + name);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return httpResponse;
+    }
+
+    public String getContent(HttpResponse response) {
+        String content = "";
+        try {
+            content = EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return content;
     }
 
     @Override
@@ -144,5 +144,11 @@ public class RestApacheClient implements InterfaceClient {
     @Override
     public int getDeleteUserStatusCode(String user) {
         return delete(user).getStatusLine().getStatusCode();
+    }
+
+    public static void main(String[] args) throws IOException {
+        RestApacheClient restApacheClient = new RestApacheClient();
+
+        System.out.println(restApacheClient.getUserByFirstNameResponse("Boris"));
     }
 }

@@ -40,6 +40,7 @@ public class JsonUtils {
     }
 
     public static ResponseModel fromJsonString(String json) throws IOException {
+        System.out.println(json);
         return getObjectReader().readValue(json);
     }
 

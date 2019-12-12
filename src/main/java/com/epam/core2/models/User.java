@@ -8,6 +8,7 @@ public class User {
 
     private String gender;
 
+
     private String email;
 
     private String status;
@@ -51,4 +52,15 @@ public class User {
     public String getStatus() {
         return this.status;
     }
-   }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
+}

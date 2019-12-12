@@ -131,6 +131,11 @@ public class RestAssuredClient implements InterfaceClient {
         return getUserByName(userName).then().extract().body().asString();
     }
 
+    public static void main(String[] args) {
+        RestAssuredClient restAssuredClient = new RestAssuredClient();
+        System.out.println(restAssuredClient.getUserByFirstNameResponse("Boris"));
+    }
+
     @Override
     public int getDeleteUserStatusCode(String userName) {
         return deleteUser(userName).then().extract().statusCode();
