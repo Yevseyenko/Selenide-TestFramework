@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import static com.epam.core2.constants.Constants.FIRST_NAME_PARAMETER;
 import static io.restassured.RestAssured.given;
 
 public class RestAssuredClient implements InterfaceClient {
@@ -28,8 +29,8 @@ public class RestAssuredClient implements InterfaceClient {
 
 
     private void setBasePath() {
-        logger.info("Request executed to: " + EndPoints.domain);
-        RestAssured.basePath = EndPoints.domain;
+        logger.info("Request executed to: " + EndPoints.users);
+        RestAssured.basePath = EndPoints.users;
     }
 
     private void setEndPoint() {
@@ -37,7 +38,7 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     private void setUserEndPoint(String user) {
-        this.specification.setBaseUri(EndPoints.usersByName + user);
+        this.specification.setBaseUri(EndPoints.users+FIRST_NAME_PARAMETER + user);
     }
 
     private void setHeaders(String token) {
@@ -47,7 +48,7 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     private Response getRequest(String name) {
-        return given(specification.build()).get(EndPoints.usersByName + name);
+        return given(specification.build()).get(EndPoints.users+FIRST_NAME_PARAMETER + name);
     }
 
     private Response postRequest() {
@@ -55,7 +56,7 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     private Response deleteRequest(String user) {
-        return given(specification.build()).delete(String.format(EndPoints.usersByName, user));
+        return given(specification.build()).delete(String.format(EndPoints.users+FIRST_NAME_PARAMETER, user));
     }
 
     public RequestSpecBuilder getSpecification() {
@@ -107,10 +108,6 @@ public class RestAssuredClient implements InterfaceClient {
         setBasePath();
         setHeaders(Propertiator.getTokenDomain());
         return deleteRequest(user);
-    }
-
-    public String getUsersResponse(){
-        return getUsers().then().extract().body().asString();
     }
 
     @Override

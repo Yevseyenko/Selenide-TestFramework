@@ -20,11 +20,11 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import static com.epam.core2.constants.Constants.FIRST_NAME_PARAMETER;
 
 public class RestApacheClient implements InterfaceClient {
     private List<Header> headers;
@@ -47,7 +47,7 @@ public class RestApacheClient implements InterfaceClient {
         try {
             httpEntity = new StringEntity(payload);
         } catch (UnsupportedEncodingException e) {
-            logger.info("Couldn't create Entity " + e.getMessage());
+            logger.error("Couldn't create Entity " + e.getMessage());
         }
         return httpEntity;
     }
@@ -80,7 +80,7 @@ public class RestApacheClient implements InterfaceClient {
     }
 
     private HttpDelete basicDelete(String user) {
-        return new HttpDelete(EndPoints.usersByName + user);
+        return new HttpDelete(EndPoints.users + FIRST_NAME_PARAMETER + user);
     }
 
     private HttpResponse delete(String user) {
@@ -95,18 +95,16 @@ public class RestApacheClient implements InterfaceClient {
         return httpResponse;
     }
 
-
     private HttpResponse getByUserName(String name) {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet(EndPoints.usersByName + name);
+        HttpGet httpGet = new HttpGet(EndPoints.users + FIRST_NAME_PARAMETER + name);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return httpResponse;
     }
 
@@ -118,11 +116,6 @@ public class RestApacheClient implements InterfaceClient {
             e.printStackTrace();
         }
         return content;
-    }
-
-    @Override
-    public String getUsersResponse() {
-        return null;
     }
 
     @Override
@@ -144,11 +137,5 @@ public class RestApacheClient implements InterfaceClient {
     @Override
     public int getDeleteUserStatusCode(String user) {
         return delete(user).getStatusLine().getStatusCode();
-    }
-
-    public static void main(String[] args) throws IOException {
-        RestApacheClient restApacheClient = new RestApacheClient();
-
-        System.out.println(restApacheClient.getUserByFirstNameResponse("Boris"));
     }
 }
