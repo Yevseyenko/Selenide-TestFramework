@@ -20,6 +20,7 @@ public class Propertiator {
         return properties.getProperty(name).toString();
     }
 
+
     public static String getTokenDomain() {
         return getProperty("token");
     }

@@ -1,7 +1,6 @@
 package com.epam.core2.client;
 
 import ch.qos.logback.classic.Logger;
-import com.epam.core2.constants.EndPoints;
 import com.epam.core2.models.User;
 import com.epam.core2.utils.JsonUtils;
 import com.epam.core2.utils.Propertiator;
@@ -17,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import static com.epam.core2.constants.Constants.ENDPOINT;
 import static com.epam.core2.constants.Constants.FIRST_NAME_PARAMETER;
 import static io.restassured.RestAssured.given;
 
@@ -29,16 +29,16 @@ public class RestAssuredClient implements InterfaceClient {
 
 
     private void setBasePath() {
-        logger.info("Request executed to: " + EndPoints.users);
-        RestAssured.basePath = EndPoints.users;
+        logger.info("Request executed to: " + ENDPOINT);
+        RestAssured.basePath = ENDPOINT;
     }
 
     private void setEndPoint() {
-        this.specification.setBaseUri(EndPoints.users);
+        this.specification.setBaseUri(ENDPOINT);
     }
 
     private void setUserEndPoint(String user) {
-        this.specification.setBaseUri(EndPoints.users+FIRST_NAME_PARAMETER + user);
+        this.specification.setBaseUri(ENDPOINT+FIRST_NAME_PARAMETER + user);
     }
 
     private void setHeaders(String token) {
@@ -48,15 +48,15 @@ public class RestAssuredClient implements InterfaceClient {
     }
 
     private Response getRequest(String name) {
-        return given(specification.build()).get(EndPoints.users+FIRST_NAME_PARAMETER + name);
+        return given(specification.build()).get(ENDPOINT+FIRST_NAME_PARAMETER + name);
     }
 
     private Response postRequest() {
-        return given(specification.build()).post(EndPoints.users);
+        return given(specification.build()).post(ENDPOINT);
     }
 
     private Response deleteRequest(String user) {
-        return given(specification.build()).delete(String.format(EndPoints.users+FIRST_NAME_PARAMETER, user));
+        return given(specification.build()).delete(String.format(ENDPOINT+FIRST_NAME_PARAMETER, user));
     }
 
     public RequestSpecBuilder getSpecification() {

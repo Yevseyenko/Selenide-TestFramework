@@ -1,7 +1,6 @@
 package com.epam.core2.client;
 
 import ch.qos.logback.classic.Logger;
-import com.epam.core2.constants.EndPoints;
 import com.epam.core2.models.User;
 import com.epam.core2.utils.Propertiator;
 import com.google.common.collect.Lists;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import static com.epam.core2.constants.Constants.ENDPOINT;
 import static com.epam.core2.constants.Constants.FIRST_NAME_PARAMETER;
 
 public class RestApacheClient implements InterfaceClient {
@@ -56,7 +56,7 @@ public class RestApacheClient implements InterfaceClient {
         HttpResponse httpResponse = null;
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
-        HttpGet httpGet = new HttpGet(EndPoints.users);
+        HttpGet httpGet = new HttpGet(ENDPOINT);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class RestApacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpPost httpPost = new HttpPost(EndPoints.users);
+        HttpPost httpPost = new HttpPost(ENDPOINT);
         httpPost.setEntity(createEntity(payload));
         try {
             httpResponse = httpClient.execute(httpPost);
@@ -80,7 +80,7 @@ public class RestApacheClient implements InterfaceClient {
     }
 
     private HttpDelete basicDelete(String user) {
-        return new HttpDelete(EndPoints.users + FIRST_NAME_PARAMETER + user);
+        return new HttpDelete(ENDPOINT + FIRST_NAME_PARAMETER + user);
     }
 
     private HttpResponse delete(String user) {
@@ -99,7 +99,7 @@ public class RestApacheClient implements InterfaceClient {
         setBasicClientHeaders(Propertiator.getTokenDomain());
         buildClient();
         HttpResponse httpResponse = null;
-        HttpGet httpGet = new HttpGet(EndPoints.users + FIRST_NAME_PARAMETER + name);
+        HttpGet httpGet = new HttpGet(ENDPOINT + FIRST_NAME_PARAMETER + name);
         try {
             httpResponse = httpClient.execute(httpGet);
         } catch (IOException e) {
