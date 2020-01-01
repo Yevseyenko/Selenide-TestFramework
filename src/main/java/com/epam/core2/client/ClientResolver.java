@@ -2,7 +2,7 @@ package com.epam.core2.client;
 
 
 public abstract class ClientResolver {
-
+//factory method
    public static InterfaceClient getClient(String dataProviderClassName){
        if(dataProviderClassName.equals("NameDataProvider")){
            return new RestApacheClient();

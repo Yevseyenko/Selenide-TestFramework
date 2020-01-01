@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CalendarBO {
-
+    //facade
     private Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(this.getClass());
     private CalendarPO calendarPO = new CalendarPO();
 

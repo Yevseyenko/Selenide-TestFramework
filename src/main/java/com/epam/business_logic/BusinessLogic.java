@@ -1,4 +1,4 @@
-package com.epam.core2;
+package com.epam.business_logic;
 
 import ch.qos.logback.classic.Logger;
 import com.epam.core2.models.ResponseModel;

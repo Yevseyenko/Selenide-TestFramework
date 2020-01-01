@@ -1,6 +1,5 @@
 package com.epam;
 
-import ch.qos.logback.classic.Logger;
 import com.epam.bo.CalendarBO;
 import com.epam.bo.LoginBO;
 import com.epam.bo.NbaBO;
@@ -11,7 +10,6 @@ import com.epam.page.NbaPO;
 import com.epam.page.TribunaPO;
 import com.epam.utils.SelenideConfigurator;
 import com.epam.utils.Validation;
-import org.slf4j.LoggerFactory;
 import org.testng.TestListenerAdapter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -60,7 +58,7 @@ public class NBATest {
     public void verifyLoginToSite() {
         tribunaPO.hoverBasketBtn().clickNbaBtn();
         nbaPO.clickLoginButton();
-        loginBO.loginUser(USEREMAIL, PASS);
+        loginBO.loginUser(USEREMAIL, PASS, this);
         loginPO.clickLogin();
         Validation.validateLoginPage(nbaPO.isLoginedTabDisplayed());
     }
@@ -70,7 +68,6 @@ public class NBATest {
         nbaPO.inputValueToSearch("").clickSearchButton();
         Validation.validateSearchResult(nbaPO.isSearchResultAppear());
     }
-
 
     @Test(priority = 3, description = "Scenario with verifying calendar page")
     public void verifyCalendarButtonAndSendingMatchResults() {

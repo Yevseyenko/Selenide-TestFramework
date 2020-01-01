@@ -1,6 +1,6 @@
 package com.epam;
 
-import com.epam.core2.BusinessLogic;
+import com.epam.business_logic.BusinessLogic;
 import com.epam.core2.client.ClientResolver;
 import com.epam.core2.client.InterfaceClient;
 import com.epam.core2.data.NameDataProvider;

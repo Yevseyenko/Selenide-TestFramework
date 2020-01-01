@@ -13,6 +13,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static com.epam.core.enums.LocatorTypeEnum.CSS;
 import static com.epam.core.enums.LocatorTypeEnum.XPATH;
 
+//strategy
 public class Waiter {
     public static void fluentWait(String locator, LocatorTypeEnum locatorTypeEnum) {
         if (locatorTypeEnum.equals(CSS)) {

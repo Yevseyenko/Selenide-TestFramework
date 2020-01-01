@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPO {
-
+    //lazy initialization
     private SelenideElement userNameInput = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'email')]"));
     private SelenideElement userPassword = $(By.xpath("//div[@class='auth__form-row']//input[contains(@class,'auth__login-input i')]"));
     private SelenideElement buttonLogin = $(By.xpath("//div/button[contains(@class,'piwik')]"));

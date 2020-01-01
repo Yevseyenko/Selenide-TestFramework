@@ -1,7 +1,7 @@
 package com.epam.core2.client;
 
 import com.epam.core2.models.User;
-
+//abstract factory
 public interface InterfaceClient<T> {
 
     int getUsersStatusCode();

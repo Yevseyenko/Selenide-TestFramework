@@ -6,7 +6,11 @@ import java.util.List;
 
 public class NbaBO {
 
-    public NbaPO nbaPO = new NbaPO();
+    public NbaPO nbaPO;
+
+    public NbaBO() {
+        nbaPO = new NbaPO();
+    }
 
     public String getLogoHeaderText() {
         return nbaPO.getLogoHeader().getText();
